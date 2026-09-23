@@ -337,6 +337,59 @@ html,body{max-width:100%;overflow-x:hidden}
 .route-leg-card{display:flex;gap:10px;align-items:flex-start;background:rgba(47,143,107,.075);border:1px solid rgba(47,143,107,.22);border-radius:12px;padding:11px 12px;margin:0 0 2px -8px}
 .route-leg-icon{font-size:18px;line-height:1.2}.route-leg-card small{display:block;font-size:9px;font-weight:800;letter-spacing:.1em;color:var(--jade);margin-bottom:2px}.route-leg-card b{display:block;font-size:12px;line-height:1.35;color:var(--navy)}.route-leg-card a{display:inline-block;margin-top:5px;font-size:11.5px;font-weight:800;color:var(--jade);text-decoration:none}.route-leg-card a:hover{text-decoration:underline}
 
+
+/* === MOBILE HERO FIX === */
+@media (max-width:600px){
+  .hero{
+    min-height:0!important;
+    height:auto!important;
+    padding:22px 16px 30px!important;
+    display:block!important;
+    background-position:64% center!important;
+    background-size:cover!important;
+    overflow:hidden!important;
+  }
+  .brandbar{
+    margin:0 auto 24px!important;
+    gap:8px!important;
+    align-items:center!important;
+  }
+  .brandmark{min-width:0!important;flex-wrap:wrap!important}
+  .brandmark small{width:100%!important;margin-top:2px!important}
+  .doctype{font-size:10px!important;padding:5px 8px!important}
+  .hero-body{
+    padding:0!important;
+    width:100%!important;
+    max-width:100%!important;
+  }
+  .hero h1{
+    font-size:clamp(38px,12vw,50px)!important;
+    line-height:.98!important;
+    max-width:100%!important;
+    overflow-wrap:anywhere!important;
+  }
+  .hero p.sub{
+    font-size:15px!important;
+    line-height:1.5!important;
+    max-width:94%!important;
+    margin-top:12px!important;
+  }
+  .route-strip{
+    margin-top:24px!important;
+    padding-top:16px!important;
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    width:calc(100% + 16px)!important;
+    padding-right:16px!important;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .route-strip::-webkit-scrollbar{display:none}
+  .route-strip .stop{flex:0 0 auto!important}
+}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
