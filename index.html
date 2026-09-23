@@ -325,6 +325,11 @@ html,body{max-width:100%;overflow-x:hidden}
 .day-cards{gap:12px}.day-jump{padding:15px;border-radius:14px;transition:.18s}.day-jump:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(15,42,61,.07)}
 @media(max-width:760px){.home-intro-card{grid-template-columns:1fr;padding:22px 20px;gap:20px}.home-stats{width:100%}.home-stats div{flex:1;min-width:0}.destinations-merged{margin-top:40px}.destination-grid{grid-template-columns:1fr!important}.destination-card img{aspect-ratio:16/9!important}.destination-intro{min-height:0}#panel-overview>.home-section:not(.destinations-merged){margin-top:42px}}
 
+
+/* Internal daily route maps */
+.route-map{height:300px!important;border:1px solid var(--line)!important;background:#f2f2f2}
+@media(max-width:600px){.route-map{height:280px!important}}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
@@ -723,6 +728,10 @@ function mapEmbed(query){
 }
 function googleSearch(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);}
 function googleDirections(o,d,w=[]){let u="https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(o)+"&destination="+encodeURIComponent(d);if(w.length)u+="&waypoints="+encodeURIComponent(w.join("|"));return u;}
+function googleDirectionsEmbed(o,d,w=[]){
+  const parts=[o,...w,d].map(x=>encodeURIComponent(x));
+  return "https://www.google.com/maps?output=embed&q="+parts.join("%20to%20");
+}
 const GOOGLE_ROUTES={
 1:["Plaza Bolívar, Bogotá, Colombia","Origen Bistró Centro Histórico, Bogotá, Colombia",["Chorro de Quevedo, Bogotá, Colombia"]],
 2:["Plaza Bolívar, Bogotá, Colombia","Andrés Carne de Res, Chía, Colombia",["Chorro de Quevedo, Bogotá, Colombia","Museo Botero, Bogotá, Colombia","Museo del Oro, Bogotá, Colombia"]],
@@ -738,6 +747,7 @@ const GOOGLE_ROUTES={
 12:["Spratt Bay, San Andrés, Colombia","Cayo Acuario, San Andrés, Colombia",[]],
 13:["Spratt Bay, San Andrés, Colombia","Johnny Cay, San Andrés, Colombia",[]]};
 function routeForDay(d){const r=GOOGLE_ROUTES[d.id];return r?googleDirections(r[0],r[1],r[2]):googleSearch(d.map);}
+function routeEmbedForDay(d){const r=GOOGLE_ROUTES[d.id];return r?googleDirectionsEmbed(r[0],r[1],r[2]):mapEmbed(d.map);}
 
 
 // Route strip
@@ -830,7 +840,7 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
       <div>
         <div class="side-card">
           <h4>Google Maps · Day ${d.id}</h4>
-          <iframe class="daymap" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="${mapEmbed(d.map)}"></iframe>
+          <iframe class="daymap route-map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="${routeEmbedForDay(d)}" title="Percorso Google Maps Day ${d.id}"></iframe>
           <div class="map-actions">
             <a class="map-btn primary" href="${routeForDay(d)}" target="_blank" rel="noopener">🧭 Apri percorso del giorno</a>
             <a class="map-btn" href="${googleSearch(d.map)}" target="_blank" rel="noopener">📍 Apri tappa</a>
