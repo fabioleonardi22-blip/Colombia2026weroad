@@ -330,6 +330,13 @@ html,body{max-width:100%;overflow-x:hidden}
 .route-map{height:300px!important;border:1px solid var(--line)!important;background:#f2f2f2}
 @media(max-width:600px){.route-map{height:280px!important}}
 
+
+/* Route legs inside Day-by-Day timeline */
+.route-leg{margin:12px 0 2px 0;position:relative}
+.route-leg-line{height:12px;border-left:2px dashed rgba(47,143,107,.45);margin-left:13px}
+.route-leg-card{display:flex;gap:10px;align-items:flex-start;background:rgba(47,143,107,.075);border:1px solid rgba(47,143,107,.22);border-radius:12px;padding:11px 12px;margin:0 0 2px -8px}
+.route-leg-icon{font-size:18px;line-height:1.2}.route-leg-card small{display:block;font-size:9px;font-weight:800;letter-spacing:.1em;color:var(--jade);margin-bottom:2px}.route-leg-card b{display:block;font-size:12px;line-height:1.35;color:var(--navy)}.route-leg-card a{display:inline-block;margin-top:5px;font-size:11.5px;font-weight:800;color:var(--jade);text-decoration:none}.route-leg-card a:hover{text-decoration:underline}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
@@ -748,6 +755,27 @@ const GOOGLE_ROUTES={
 13:["Spratt Bay, San Andrés, Colombia","Johnny Cay, San Andrés, Colombia",[]]};
 function routeForDay(d){const r=GOOGLE_ROUTES[d.id];return r?googleDirections(r[0],r[1],r[2]):googleSearch(d.map);}
 function routeEmbedForDay(d){const r=GOOGLE_ROUTES[d.id];return r?googleDirectionsEmbed(r[0],r[1],r[2]):mapEmbed(d.map);}
+function legLink(a,b){return googleDirections(a,b,[]);}
+function dayRouteLegs(d){
+  const r=GOOGLE_ROUTES[d.id];
+  if(!r) return [];
+  const pts=[r[0],...(r[2]||[]),r[1]];
+  return pts.slice(0,-1).map((p,i)=>({from:p,to:pts[i+1],url:legLink(p,pts[i+1])}));
+}
+function renderScheduleWithRoutes(d){
+  const legs=dayRouteLegs(d);
+  const items=d.schedule.map(([t,desc],i)=>`<li><div class="time">${t}</div><div class="desc">${desc}</div></li>`);
+  if(!legs.length) return items.join('');
+  const slots=[];
+  d.schedule.forEach(([t,desc],i)=>{
+    if(/🚐|✈️|🚙|🛶|Partenza|Transfer|verso|→|Rientro|Arrivo|Passeggiata|Visita|Tour|Piedra|Ciudad|Johnny|Cayo|diving|Finca|Valle/i.test(desc)) slots.push(i);
+  });
+  legs.forEach((leg,j)=>{
+    let pos=slots[j]!==undefined?slots[j]:Math.min(j,items.length-1);
+    items[pos]+=`<div class="route-leg"><div class="route-leg-line"></div><div class="route-leg-card"><span class="route-leg-icon">🗺️</span><div><small>SPOSTAMENTO</small><b>${leg.from} → ${leg.to}</b><a href="${leg.url}" target="_blank" rel="noopener">Apri percorso in Google Maps ↗</a></div></div></div>`;
+  });
+  return items.join('');
+}
 
 
 // Route strip
@@ -834,7 +862,7 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
     <div class="grid">
       <div>
         <ul class="timeline">
-          ${d.schedule.map(([t,desc])=>`<li><div class="time">${t}</div><div class="desc">${desc}</div></li>`).join('')}
+          ${renderScheduleWithRoutes(d)}
         </ul>
       </div>
       <div>
