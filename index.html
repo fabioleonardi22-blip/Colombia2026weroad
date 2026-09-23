@@ -312,6 +312,19 @@ html,body{max-width:100%;overflow-x:hidden}
 
 /* === MERGE TAPPE + ZONE === */
 .destinations-merged{margin-top:8px}.merged-head{margin-bottom:22px}.merged-head h3{font-size:clamp(30px,4vw,46px);margin-top:4px}.destination-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.destination-card{appearance:none;border:0;padding:0;background:#0b2433;color:#fff;border-radius:14px;overflow:hidden;text-align:left;cursor:pointer;box-shadow:0 8px 24px rgba(9,26,38,.12);transition:transform .2s ease,box-shadow .2s ease;min-width:0}.destination-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(9,26,38,.18)}.destination-card img{display:block;width:100%;height:190px;object-fit:cover}.destination-body{padding:17px 18px 18px;min-height:245px;display:flex;flex-direction:column}.destination-day{font-size:11px;letter-spacing:.12em;font-weight:800;color:var(--coral);margin-bottom:5px}.destination-body h4{font-size:27px;color:#fff;margin-bottom:6px}.destination-intro{font-size:13.5px;line-height:1.4;color:rgba(255,255,255,.82);margin:0 0 13px}.destination-facts{border-top:1px solid rgba(255,255,255,.25);padding-top:11px;display:grid;gap:8px;margin-top:auto}.destination-facts span{font-size:12.5px;line-height:1.35;color:rgba(255,255,255,.9)}@media(max-width:980px){.destination-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.destination-card img{height:210px}}@media(max-width:560px){.destination-grid{grid-template-columns:1fr;gap:14px}.destination-card{display:grid;grid-template-columns:42% 58%;min-height:230px}.destination-card img{height:100%;min-height:230px}.destination-body{min-height:230px;padding:15px}.destination-body h4{font-size:23px}.destination-intro{font-size:12.5px}.destination-facts span{font-size:11.5px}}
+
+/* === HP POLISH v2 === */
+#panel-overview{padding-top:4px}
+.home-intro-card{display:grid;grid-template-columns:minmax(0,1.45fr) auto;gap:34px;align-items:end;padding:28px 30px;border-radius:22px;background:linear-gradient(135deg,#fff 0%,#f6f0e7 100%);border:1px solid var(--line);box-shadow:0 14px 36px rgba(15,42,61,.06)}
+.home-intro-card .home-title{font-size:clamp(32px,4.5vw,52px);color:var(--navy);line-height:.98}
+.home-intro-card .home-lead{font-size:15.5px;line-height:1.65;max-width:680px}
+.home-stats{display:flex;gap:10px}.home-stats div{min-width:78px;padding:13px 14px;border-radius:14px;background:#fff;border:1px solid var(--line);text-align:center}.home-stats b{display:block;font-family:Georgia,serif;font-size:25px;color:var(--coral);line-height:1}.home-stats span{display:block;margin-top:5px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text-soft)}
+.destinations-merged{margin-top:54px}.merged-head{margin-bottom:22px}.merged-head h3{font-size:clamp(28px,3.5vw,38px);line-height:1.05}.merged-head .section-sub{max-width:690px;line-height:1.55}
+.destination-grid{gap:18px!important}.destination-card{border-radius:16px!important;overflow:hidden!important;box-shadow:0 8px 24px rgba(15,42,61,.07)!important}.destination-card img{aspect-ratio:16/9!important;height:auto!important;object-fit:cover!important}.destination-body{padding:16px 17px 18px!important}.destination-body h4{font-size:22px!important}.destination-intro{min-height:42px}.destination-facts{margin-top:12px!important;padding-top:11px!important;border-top:1px solid var(--line)}
+#panel-overview>.home-section:not(.destinations-merged){margin-top:58px}.home-section-head h3{font-size:28px}.map-embed#overviewMap{box-shadow:0 12px 30px rgba(15,42,61,.08);border-radius:18px}
+.day-cards{gap:12px}.day-jump{padding:15px;border-radius:14px;transition:.18s}.day-jump:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(15,42,61,.07)}
+@media(max-width:760px){.home-intro-card{grid-template-columns:1fr;padding:22px 20px;gap:20px}.home-stats{width:100%}.home-stats div{flex:1;min-width:0}.destinations-merged{margin-top:40px}.destination-grid{grid-template-columns:1fr!important}.destination-card img{aspect-ratio:16/9!important}.destination-intro{min-height:0}#panel-overview>.home-section:not(.destinations-merged){margin-top:42px}}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
@@ -339,9 +352,18 @@ html,body{max-width:100%;overflow-x:hidden}
 
 <main>
   <div class="panel active" id="panel-overview">
-    <div class="home-kicker">Colombia Expedition · Home</div>
-    <h2 class="home-title">Otto tappe, mille sfumature.</h2>
-    <p class="home-lead">Una panoramica operativa del viaggio: rotta, territori, programma giorno per giorno, voli del gruppo e cose da ricordare prima di partire.</p>
+    <div class="home-intro-card">
+      <div>
+        <div class="home-kicker">27 DICEMBRE 2026 → 8 GENNAIO 2027</div>
+        <h2 class="home-title">Dalle Ande ai Caraibi.</h2>
+        <p class="home-lead">13 giorni attraverso città, Amazzonia, valle del caffè e mare: qui trovi a colpo d’occhio tappe, rotta, programma, voli e informazioni operative.</p>
+      </div>
+      <div class="home-stats">
+        <div><b>13</b><span>giorni</span></div>
+        <div><b>8</b><span>tappe</span></div>
+        <div><b>3</b><span>climi</span></div>
+      </div>
+    </div>
 
     <section class="home-section destinations-merged">
       <div class="home-section-head merged-head"><div><div class="home-kicker">LE 8 TAPPE DEL VIAGGIO</div><h3>Otto tappe, mille sfumature</h3><p class="section-sub">Dalle Ande alla foresta amazzonica, dall’asse del caffè ai Caraibi. Ogni card unisce tappa, clima e carattere della zona.</p></div></div>
