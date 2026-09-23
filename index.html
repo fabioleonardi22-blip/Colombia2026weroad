@@ -755,12 +755,21 @@ const GOOGLE_ROUTES={
 13:["Spratt Bay, San Andrés, Colombia","Johnny Cay, San Andrés, Colombia",[]]};
 function routeForDay(d){const r=GOOGLE_ROUTES[d.id];return r?googleDirections(r[0],r[1],r[2]):googleSearch(d.map);}
 function routeEmbedForDay(d){const r=GOOGLE_ROUTES[d.id];return r?googleDirectionsEmbed(r[0],r[1],r[2]):mapEmbed(d.map);}
-function legLink(a,b){return "https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(a)+"&destination="+encodeURIComponent(b)+"&travelmode=walking";}
+function legMode(from,to,d){
+  const x=(from+" "+to+" "+(d?d.focus:"")).toLowerCase();
+  if(/airport|aeropuerto|aeroporto|leticia.*bogot|bogot.*leticia|pereira.*leticia|cartagena.*medell|san andr.*cartagena/.test(x)) return "flight";
+  if(/salento.*medell|medell.*guatap|guatap.*medell|pereira.*salento|aeroporto|airport|aeropuerto/.test(x)) return "transfer";
+  return "walking";
+}
+function legLink(a,b,mode){
+  if(mode==="flight") return googleSearch(a+" "+b+" voli");
+  return "https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(a)+"&destination="+encodeURIComponent(b)+"&travelmode="+(mode==="walking"?"walking":"driving");
+}
 function dayRouteLegs(d){
   const r=GOOGLE_ROUTES[d.id];
   if(!r) return [];
   const pts=[r[0],...(r[2]||[]),r[1]];
-  return pts.slice(0,-1).map((p,i)=>({from:p,to:pts[i+1],url:legLink(p,pts[i+1])}));
+  return pts.slice(0,-1).map((p,i)=>{const mode=legMode(p,pts[i+1],d);return {from:p,to:pts[i+1],mode,url:legLink(p,pts[i+1],mode)};});
 }
 function renderScheduleWithRoutes(d){
   const legs=dayRouteLegs(d);
@@ -772,7 +781,10 @@ function renderScheduleWithRoutes(d){
   });
   legs.forEach((leg,j)=>{
     let pos=slots[j]!==undefined?slots[j]:Math.min(j,items.length-1);
-    items[pos]+=`<div class="route-leg"><div class="route-leg-line"></div><div class="route-leg-card"><span class="route-leg-icon">🚶</span><div><small>PERCORSO A PIEDI</small><b>${leg.from} → ${leg.to}</b><a href="${leg.url}" target="_blank" rel="noopener">Apri percorso in Google Maps ↗</a></div></div></div>`;
+    const icon=leg.mode==="flight"?"✈️":leg.mode==="transfer"?"🚐":"🚶";
+    const label=leg.mode==="flight"?"SPOSTAMENTO IN VOLO":leg.mode==="transfer"?"TRANSFER":"PERCORSO A PIEDI";
+    const action=leg.mode==="flight"?"Apri tratta su Google Maps ↗":"Apri percorso in Google Maps ↗";
+    items[pos]+=`<div class="route-leg ${leg.mode}"><div class="route-leg-line"></div><div class="route-leg-card"><span class="route-leg-icon">${icon}</span><div><small>${label}</small><b>${leg.from} → ${leg.to}</b><a href="${leg.url}" target="_blank" rel="noopener">${action}</a></div></div></div>`;
   });
   return items.join('');
 }
