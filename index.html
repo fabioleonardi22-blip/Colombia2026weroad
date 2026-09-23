@@ -755,7 +755,7 @@ const GOOGLE_ROUTES={
 13:["Spratt Bay, San Andrés, Colombia","Johnny Cay, San Andrés, Colombia",[]]};
 function routeForDay(d){const r=GOOGLE_ROUTES[d.id];return r?googleDirections(r[0],r[1],r[2]):googleSearch(d.map);}
 function routeEmbedForDay(d){const r=GOOGLE_ROUTES[d.id];return r?googleDirectionsEmbed(r[0],r[1],r[2]):mapEmbed(d.map);}
-function legLink(a,b){return googleDirections(a,b,[]);}
+function legLink(a,b){return "https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(a)+"&destination="+encodeURIComponent(b)+"&travelmode=walking";}
 function dayRouteLegs(d){
   const r=GOOGLE_ROUTES[d.id];
   if(!r) return [];
@@ -772,7 +772,7 @@ function renderScheduleWithRoutes(d){
   });
   legs.forEach((leg,j)=>{
     let pos=slots[j]!==undefined?slots[j]:Math.min(j,items.length-1);
-    items[pos]+=`<div class="route-leg"><div class="route-leg-line"></div><div class="route-leg-card"><span class="route-leg-icon">🗺️</span><div><small>SPOSTAMENTO</small><b>${leg.from} → ${leg.to}</b><a href="${leg.url}" target="_blank" rel="noopener">Apri percorso in Google Maps ↗</a></div></div></div>`;
+    items[pos]+=`<div class="route-leg"><div class="route-leg-line"></div><div class="route-leg-card"><span class="route-leg-icon">🚶</span><div><small>PERCORSO A PIEDI</small><b>${leg.from} → ${leg.to}</b><a href="${leg.url}" target="_blank" rel="noopener">Apri percorso in Google Maps ↗</a></div></div></div>`;
   });
   return items.join('');
 }
