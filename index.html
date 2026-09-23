@@ -390,6 +390,22 @@ html,body{max-width:100%;overflow-x:hidden}
   .route-strip .stop{flex:0 0 auto!important}
 }
 
+
+/* Keep all destination photos visually identical, including Salento */
+.destination-card img{
+  width:100%!important;
+  aspect-ratio:16/9!important;
+  height:auto!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  display:block!important;
+}
+@media(max-width:600px){
+  .destination-card{display:block!important;min-height:0!important}
+  .destination-card img{width:100%!important;aspect-ratio:16/9!important;height:auto!important;min-height:0!important}
+  .destination-body{min-height:0!important}
+}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
@@ -436,7 +452,7 @@ html,body{max-width:100%;overflow-x:hidden}
         <button class="destination-card" onclick="selectTab(1)"><img src="https://humbo.s3.eu-north-1.amazonaws.com/place-photo/658702dbd0ac9c2264745706/sltVkeSSKg.jpeg" alt="Bogotá La Candelaria" loading="lazy"><div class="destination-body"><span class="destination-day">DAY 1 · 2</span><h4>Bogotá</h4><p class="destination-intro">Capitale d’altura tra storia, arte e street culture.</p><div class="destination-facts"><span>⛰ Altitudine 2.640 m</span><span>🌡 Fresco · 7–19°C</span><span>★ La Candelaria, murales, musei e gastronomia</span></div></div></button>
         <button class="destination-card" onclick="selectTab(3)"><img src="https://outlanders-dmc.com/wp-content/uploads/2024/07/Calanoa.8.jpg" alt="Amazzonia colombiana" loading="lazy"><div class="destination-body"><span class="destination-day">DAY 3 · 4</span><h4>Amazzonia</h4><p class="destination-intro">Leticia, fiume, foresta e comunità locali.</p><div class="destination-facts"><span>🌿 Natura selvaggia e biodiversità</span><span>🌡 Caldo umido · 25–32°C</span><span>🛶 Barca, Reserva Marasha e vita nella foresta</span></div></div></button>
         <button class="destination-card" onclick="selectTab(5)"><img src="https://colombia.travel/sites/default/files/styles/imagen_650x450_escala_y_recorte/public/actividades/Cultura-cafetera-pereira.jpg.webp?itok=vyIlYrUM" alt="Pereira regione del caffè" loading="lazy"><div class="destination-body"><span class="destination-day">DAY 5 · TRANSITO</span><h4>Pereira</h4><p class="destination-intro">Porta d’ingresso al Paisaje Cultural Cafetero.</p><div class="destination-facts"><span>☕ Colline e piantagioni di caffè</span><span>🌡 Temperato di montagna</span><span>✈ Arrivo e trasferimento verso Salento</span></div></div></button>
-        <button class="destination-card" onclick="selectTab(5)"><img src="https://d2vbr83hnyiux1.cloudfront.net/image/975050285728/image_og40506btt26j92315ulhont75?auto=compress&fit=crop&format=auto&h=800&q=70&w=1200" alt="Valle del Cocora Salento" loading="lazy"><div class="destination-body"><span class="destination-day">DAY 5 · 6</span><h4>Salento</h4><p class="destination-intro">Palme di cera, trekking e cultura del caffè.</p><div class="destination-facts"><span>🌴 Valle del Cocora</span><span>🌡 Mite · 12–24°C</span><span>☕ Finca El Ocaso e atmosfera andina</span></div></div></button>
+        <button class="destination-card" onclick="selectTab(5)"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Valle_de_Cocora%2C_Quind%C3%ADo%2C_Colombia.jpg/1280px-Valle_de_Cocora%2C_Quind%C3%ADo%2C_Colombia.jpg" alt="Valle del Cocora Salento" loading="lazy"><div class="destination-body"><span class="destination-day">DAY 5 · 6</span><h4>Salento</h4><p class="destination-intro">Palme di cera, trekking e cultura del caffè.</p><div class="destination-facts"><span>🌴 Valle del Cocora</span><span>🌡 Mite · 12–24°C</span><span>☕ Finca El Ocaso e atmosfera andina</span></div></div></button>
         <button class="destination-card" onclick="selectTab(7)"><img src="https://gd-colombia.sfo2.cdn.digitaloceanspaces.com/2018/12/medellin-colombia-teleferico-1024x683.jpg" alt="Medellín Metrocable" loading="lazy"><div class="destination-body"><span class="destination-day">DAY 7</span><h4>Medellín</h4><p class="destination-intro">La città dell’eterna primavera, energia e trasformazione.</p><div class="destination-facts"><span>🌡 Mite · 23–26°C</span><span>🚡 Comuna 13 e Metrocable</span><span>♫ Street art, Provenza e vita serale</span></div></div></button>
         <button class="destination-card" onclick="selectTab(8)"><img src="https://uploads.grupodicas.com/2023/02/laguna-guatape-medellin.jpg" alt="Guatapé e Piedra del Peñol" loading="lazy"><div class="destination-body"><span class="destination-day">DAY 8</span><h4>Guatapé</h4><p class="destination-intro">Acqua, colori e panorami dall’alto.</p><div class="destination-facts"><span>🪨 Piedra del Peñol</span><span>🌡 Temperato · circa 18–26°C</span><span>🚤 Zócalos colorati e giro in barca</span></div></div></button>
         <button class="destination-card" onclick="selectTab(9)"><img src="https://images.squarespace-cdn.com/content/v1/5877d741579fb331a132d9d4/1539961376993-YNQHZUWPTG3FIY88XFFG/Old%2BCity%2B-%2BYour%2BGuide%2BTo%2BGetting%2BCosmetic%2BDental%2BWork%2BIn%2BCartagena%2C%2BColombia%2BWith%2BDentist%2BDr.%2BJulio%2BOliver.jpg" alt="Cartagena città coloniale" loading="lazy"><div class="destination-body"><span class="destination-day">DAY 9</span><h4>Cartagena</h4><p class="destination-intro">Città coloniale sul mare e atmosfera caraibica.</p><div class="destination-facts"><span>☀ Caldo · 26–32°C</span><span>🏛 Ciudad Amurallada e Getsemaní</span><span>⛵ Tramonto sul mare e serata caraibica</span></div></div></button>
