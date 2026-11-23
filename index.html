@@ -674,7 +674,7 @@ const DAYS = [
     cashFee:{title:"TASSA DI SOGGIORNO — LETICIA",amount:"50.000 COP/pax",payment:"SOLO IN CONTANTI"},
     transferFee:{title:"TRANSFER AEROPORTO → GLAMPING",amount:"20 €/pax",payment:"DA PAGARE IN CONTANTI DIRETTAMENTE ALLA DMC"},
     fincaExcursion:{title:"ESCURSIONE NEI CAMPI DELLA FINCA DI MAMBEA",body:"Dopo il check-in, si parte a piedi dal glamping per l’escursione alla Finca di Mambea.\n\nPortate il minimo indispensabile: sali minerali, soprattutto nella stagione umida, costume, asciugamano, repellente, torce e almeno 1,5/2L di acqua a testa.\n\nIl cammino dura circa 1.30 – 2 h nella foresta amazzonica: è abbastanza facile e senza grossi dislivelli. La finca è poco turistica, molto wild e i local parlano solo spagnolo!\n\nLì vi attenderà uno sciamano che vi spiegherà la loro cultura. Raccoglierete foglie di coca, farete il processo di essiccazione per ottenere la mambea che assaggerete. Se avete occasione, provate l’ananas che vi offrono. CONSIGLIATO!\n\nCome ringraziamento per l’ospitalità, potete acquistare birre o bevande. Il ritorno sarà verso sera, poco prima del tramonto, ma se la visita andrà per le lunghe, potreste tornare col buio: tenete a portata di mano le torce frontali.\n\nIn tutto, dalla partenza al ritorno al glamping, la visita dura 5-7 ore, in base a quanto tempo vorrete rimanere con lo sciamano."},
-    glampingNote:{title:"NOTA PER IL GLAMPING",body:"Anche se dormiremo in un glamping con bagno privato, siamo comunque in Amazzonia: il livello dei servizi offerti potrebbe essere inferiore alle aspettative e variare in base a diversi fattori non prevedibili. Seguite sempre le indicazioni per aprire e chiudere le bolle, altrimenti si sgonfiano. NOTA BENE! Il telefono prende a tratti e solo in alcune bolle sono presenti prese elettriche, per cui è fondamentale portare un powerbank carico o, in alternativa, lasciare i telefoni nella hall del glamping (è sicuro, sarete solo voi), o durante la cena o la notte. Ogni bolla è dotata comunque di un’illuminazione, così come il sentiero per raggiungerla. Il bagno è esterno, “all’aperto”, ma garantisce comunque la privacy. Ricorda che qui l’acqua per fare la doccia sarà tiepida! Nel glamping, vi saranno forniti asciugamani, ma non hanno l’asciugacapelli."}
+    glampingNote:{title:"NOTA PER IL GLAMPING",body:"Anche se dormiremo in un glamping con bagno privato, siamo comunque in Amazzonia: il livello dei servizi offerti potrebbe essere inferiore alle aspettative e variare in base a diversi fattori non prevedibili."}
   },
   {
     id:4, date:"30 dic", dest:"Amazzonia", focus:"Rio delle Amazzoni + Riserva Marasha", map:"Reserva Natural Marasha, Amazonas, Colombia",
@@ -1023,16 +1023,16 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
           ${renderScheduleWithRoutes(d)}
         </ul>
         ${d.cashFee ? `
-        <div class="note-box" style="margin:18px 0; padding:16px 18px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.07); border-radius:14px;">
-          <strong>${d.cashFee.title}</strong>
-          <div style="font-size:21px; font-weight:800; margin-top:6px;">${d.cashFee.amount}</div>
-          <div style="margin-top:6px; font-weight:800; color:#C43B20;">${d.cashFee.payment}</div>
+        <div class="note-box" style="margin:10px 0; padding:10px 14px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.07); border-radius:12px;">
+          <strong style="font-size:12px;">${d.cashFee.title}</strong>
+          <div style="font-size:17px; font-weight:800; margin-top:4px;">${d.cashFee.amount}</div>
+          <div style="margin-top:4px; font-size:11px; font-weight:800; color:#C43B20;">${d.cashFee.payment}</div>
         </div>` : ``}
         ${d.transferFee ? `
-        <div class="note-box" style="margin:18px 0; padding:16px 18px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.07); border-radius:14px;">
-          <strong>${d.transferFee.title}</strong>
-          <div style="font-size:21px; font-weight:800; margin-top:6px;">${d.transferFee.amount}</div>
-          <div style="margin-top:6px; font-weight:800; color:#C43B20;">${d.transferFee.payment}</div>
+        <div class="note-box" style="margin:10px 0; padding:10px 14px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.07); border-radius:12px;">
+          <strong style="font-size:12px;">${d.transferFee.title}</strong>
+          <div style="font-size:17px; font-weight:800; margin-top:4px;">${d.transferFee.amount}</div>
+          <div style="margin-top:4px; font-size:11px; font-weight:800; color:#C43B20;">${d.transferFee.payment}</div>
         </div>` : ``}
         ${d.fincaExcursion ? `
         <div class="note-box" style="margin:18px 0; padding:18px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.07); border-radius:14px;">
