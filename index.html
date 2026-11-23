@@ -610,12 +610,23 @@ const DAYS = [
       ["15:00–16:00","Sistemazione, pausa e distribuzione informazioni al gruppo."],
       ["16:00–18:30","🚶 Passeggiata a La Candelaria: Plaza Bolívar, Chorro de Quevedo, murales e vie del centro."],
       ["19:30","Meeting del gruppo."],
-      ["20:00","🍽️ Cena di benvenuto: Origen Bistró Centro Histórico. Prenotazione consigliata."],
+      ["20:00","🍽️ Cena di benvenuto: prenotazione confermata. Presentarsi 15 minuti prima."],
       ["22:30","🌙 Dopocena: La Candelaria per una serata easy oppure Zona T / Zona Rosa se il gruppo ha energie."]
     ],
     todo:["Prenotare la cena di benvenuto. Origen Bistró: WA +57 310 5548665.","Alternative: Casa Matilde Cocina & Whisky (+57 321 2223272) e Gato Gris."],
     notes:["Uber è consigliato per gli spostamenti.","Macondo fornisce una SIM colombiana inclusa, da trovare direttamente in hotel."],
-    contacts:[["Origen Bistró","+57 310 5548665"],["Casa Matilde","+57 321 2223272"]]
+    contacts:[["Origen Bistró","+57 310 5548665"],["Casa Matilde","+57 321 2223272"]],
+    reservation:{
+      title:"Tu reserva está confirmada.",
+      name:"Fabio Leonardi",
+      date:"2026-12-27",
+      time:"8:00 p. m.",
+      people:"17",
+      note:"Sin notas adicionales",
+      phone:"+393397578967",
+      code:"BEDB1AD4",
+      reminder:"Recuerda llegar 15 minutos antes de la hora reservada."
+    }
   },
   {
     id:2, date:"28 dic", dest:"Bogotá", focus:"Centro storico + cultura + Andrés Carne de Res", map:"Museo del Oro, Bogota, Colombia",
@@ -995,6 +1006,20 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
         <ul class="timeline">
           ${renderScheduleWithRoutes(d)}
         </ul>
+        ${d.reservation ? `
+        <div class="note-box" style="margin:18px 0; padding:18px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.08); border-radius:14px;">
+          <strong style="font-size:16px;">${d.reservation.title}</strong>
+          <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 16px; margin-top:12px;">
+            <div><small>Nombre</small><br><b>${d.reservation.name}</b></div>
+            <div><small>Fecha</small><br><b>${d.reservation.date}</b></div>
+            <div><small>Hora</small><br><b>${d.reservation.time}</b></div>
+            <div><small>Número de personas</small><br><b>${d.reservation.people}</b></div>
+            <div><small>Nota</small><br><b>${d.reservation.note}</b></div>
+            <div><small>Teléfono</small><br><b>${d.reservation.phone}</b></div>
+            <div><small>Código de reserva</small><br><b>${d.reservation.code}</b></div>
+          </div>
+          <p style="margin:12px 0 0;"><b>${d.reservation.reminder}</b></p>
+        </div>` : ``}
       </div>
       <div>
         <div class="side-card">
