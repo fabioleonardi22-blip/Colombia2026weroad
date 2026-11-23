@@ -952,6 +952,12 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
       Il programma di queste due giornate può essere invertito, sia per quanto riguarda le attività sia per gli alloggi, in base alle condizioni climatiche o a qualsiasi altro fattore non prevedibile in anticipo.
     </div>` : ``}
 
+    ${[3,4].includes(d.id) ? `
+    <div class="note-box" style="margin:18px 0;">
+      <strong>Consigli per l'Amazzonia</strong><br>
+      È consigliato avere almeno 50 € in contanti per ogni evenienza. In generale, in Amazzonia il telefono non prende sempre, ma le strutture sono dotate di Wi-Fi.
+    </div>` : ``}
+
     <div class="grid">
       <div>
         <ul class="timeline">
