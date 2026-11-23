@@ -908,6 +908,10 @@ function dayRouteLegs(d){
 function renderScheduleWithRoutes(d){
   const legs=dayRouteLegs(d);
   const items=d.schedule.map(([t,desc],i)=>`<li><div class="time">${t}</div><div class="desc">${desc}</div></li>`);
+  if(d.cashFee){
+    const feeIndex=d.schedule.findIndex(([t])=>t==="13:00–19:00");
+    if(feeIndex>=0) items[feeIndex]+=`<div class="note-box" style="margin:10px 0 4px; padding:10px 14px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.07); border-radius:12px;"><strong style="font-size:12px;">${d.cashFee.title}</strong><div style="font-size:17px; font-weight:800; margin-top:4px;">${d.cashFee.amount}</div><div style="margin-top:4px; font-size:11px; font-weight:800; color:#C43B20;">${d.cashFee.payment}</div></div>`;
+  }
   if(!legs.length) return items.join('');
   const slots=[];
   d.schedule.forEach(([t,desc],i)=>{
@@ -1022,12 +1026,6 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
         <ul class="timeline">
           ${renderScheduleWithRoutes(d)}
         </ul>
-        ${d.cashFee ? `
-        <div class="note-box" style="margin:10px 0; padding:10px 14px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.07); border-radius:12px;">
-          <strong style="font-size:12px;">${d.cashFee.title}</strong>
-          <div style="font-size:17px; font-weight:800; margin-top:4px;">${d.cashFee.amount}</div>
-          <div style="margin-top:4px; font-size:11px; font-weight:800; color:#C43B20;">${d.cashFee.payment}</div>
-        </div>` : ``}
         ${d.transferFee ? `
         <div class="note-box" style="margin:10px 0; padding:10px 14px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.07); border-radius:12px;">
           <strong style="font-size:12px;">${d.transferFee.title}</strong>
