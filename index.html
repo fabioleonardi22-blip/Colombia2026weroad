@@ -955,20 +955,33 @@ const ROUTE_STOPS = [
   {name:"Cartagena", lat:10.3910, lng:-75.4794},
   {name:"San Andrés", lat:12.5847, lng:-81.7006}
 ];
-const overviewMap = L.map('overviewMap', {scrollWheelZoom:false});
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 18,
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(overviewMap);
+let overviewMap = null;
 const routeLatLngs = ROUTE_STOPS.map(s=>[s.lat, s.lng]);
-L.polyline(routeLatLngs, {color:'#FF5A36', weight:3, dashArray:'6,8'}).addTo(overviewMap);
-ROUTE_STOPS.forEach((s,i)=>{
-  L.marker([s.lat, s.lng]).addTo(overviewMap).bindPopup(`<b>${i+1}. ${s.name}</b>`);
-});
-overviewMap.fitBounds(routeLatLngs, {padding:[28,28]});
-function refreshOverviewMap(){setTimeout(function(){overviewMap.invalidateSize();overviewMap.fitBounds(routeLatLngs,{padding:[36,36],maxZoom:6});},100);}
-window.addEventListener('load',refreshOverviewMap);
-window.addEventListener('resize',refreshOverviewMap);
+function refreshOverviewMap(){
+  if(!overviewMap) return;
+  setTimeout(function(){overviewMap.invalidateSize();overviewMap.fitBounds(routeLatLngs,{padding:[36,36],maxZoom:6});},100);
+}
+if(typeof L !== 'undefined' && document.getElementById('overviewMap')){
+  try {
+    overviewMap = L.map('overviewMap', {scrollWheelZoom:false});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(overviewMap);
+    L.polyline(routeLatLngs, {color:'#FF5A36', weight:3, dashArray:'6,8'}).addTo(overviewMap);
+    ROUTE_STOPS.forEach((s,i)=>{
+      L.marker([s.lat, s.lng]).addTo(overviewMap).bindPopup(`<b>${i+1}. ${s.name}</b>`);
+    });
+    overviewMap.fitBounds(routeLatLngs, {padding:[28,28]});
+    window.addEventListener('load',refreshOverviewMap);
+    window.addEventListener('resize',refreshOverviewMap);
+  } catch(error) {
+    document.getElementById('overviewMap').innerHTML = '<div style="padding:24px;text-align:center;color:#667085">Mappa temporaneamente non disponibile. Il programma e la navigazione restano consultabili.</div>';
+  }
+} else {
+  const mapEl = document.getElementById('overviewMap');
+  if(mapEl) mapEl.innerHTML = '<div style="padding:24px;text-align:center;color:#667085">Mappa temporaneamente non disponibile. Il programma e la navigazione restano consultabili.</div>';
+}
 
 
 // Quickview table
