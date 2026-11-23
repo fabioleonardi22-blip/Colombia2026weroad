@@ -738,7 +738,7 @@ const DAYS = [
   },
   {
     id:7, date:"2 gen", dest:"Medellín", focus:"Salento → Medellín + Comuna 13", map:"Comuna 13, Medellin, Colombia",
-    scheduleDetails:{"04:30–05:00":"TRANSFER SALENTO – MEDELLÍN\nÈ il trasferimento più lungo: partenza indicativa tra le 4:30 e le 5:00 per arrivare a Medellín verso le 11:00, dopo circa 6 ore di viaggio.","12:00–13:00":"PRANZO\nMeglio un pranzo veloce al Mercado de la Playa, mercato gastronomico con hamburger, pizza, carne e insalate. In alternativa, se vicino all’hotel, Restaurante Hacienda La Strada.","14:00–17:00":"TOUR DELLA COMUNA 13\nMeeting point: stazione metro San Javier, uscita B.\nOrario: 13:30. Durata: 2 ore e 30 minuti.\nPrezzo: 41.000 COP a persona.\nInclude: tour guidato e trasporto in autobus.",
+    scheduleDetails:{"04:30–05:00":"TRANSFER SALENTO – MEDELLÍN\nÈ il trasferimento più lungo: partenza indicativa tra le 4:30 e le 5:00 per arrivare a Medellín verso le 11:00, dopo circa 6 ore di viaggio.","12:00–13:00":"PRANZO\nMeglio un pranzo veloce al Mercado de la Playa, mercato gastronomico con hamburger, pizza, carne e insalate. In alternativa, se vicino all’hotel, Restaurante Hacienda La Strada.","14:00–17:00":"TOUR DELLA COMUNA 13\nMeeting point: stazione metro San Javier, uscita B.\nOrario: 13:30. Durata: 2 ore e 30 minuti.\nPrezzo: 41.000 COP a persona.\nInclude: tour guidato e trasporto in autobus.","17:30–19:00":"ALTRE ATTIVITÀ POSSIBILI (DA PRENOTARE)\n• Free tour del Poblado.\n• Free tour gastronomico a Medellín.\n• Lezione di salsa: +57 319 240 5403; costo indicativo 25.000 COP/pax + TLF.","20:00":"CENA\nLe zone consigliate sono Parque Lleras e Poblado. Alcune opzioni:\n• Bastardo Restaurant – +57 310 662 8843: spazio all’aperto, cucina e drink; in posizione comoda per proseguire la serata.\n• Carmen – cucina curata, prezzi di fascia europea.\n• La Matriarca – +57 320 565 2016: ristorante tipico e spazioso nel Poblado.\n• La Matriarca F. Laurel Rooftop.","22:30":"DOPOCENA\nPer bere, ballare e fare festa, scegli la Zona Rosa e Parque Lleras, ricchi di locali e rooftop, tra cui Envy Rooftop ed Ene Rooftop. La House Provenza è uno dei locali più frequentati e resta aperto fino a tardi, anche durante la settimana."},
     schedule:[
       ["04:00","Sveglia."],
       ["04:30–05:00","🚐 Partenza Salento → Medellín."],
@@ -955,33 +955,20 @@ const ROUTE_STOPS = [
   {name:"Cartagena", lat:10.3910, lng:-75.4794},
   {name:"San Andrés", lat:12.5847, lng:-81.7006}
 ];
-let overviewMap = null;
+const overviewMap = L.map('overviewMap', {scrollWheelZoom:false});
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 18,
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(overviewMap);
 const routeLatLngs = ROUTE_STOPS.map(s=>[s.lat, s.lng]);
-function refreshOverviewMap(){
-  if(!overviewMap) return;
-  setTimeout(function(){overviewMap.invalidateSize();overviewMap.fitBounds(routeLatLngs,{padding:[36,36],maxZoom:6});},100);
-}
-if(typeof L !== 'undefined' && document.getElementById('overviewMap')){
-  try {
-    overviewMap = L.map('overviewMap', {scrollWheelZoom:false});
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(overviewMap);
-    L.polyline(routeLatLngs, {color:'#FF5A36', weight:3, dashArray:'6,8'}).addTo(overviewMap);
-    ROUTE_STOPS.forEach((s,i)=>{
-      L.marker([s.lat, s.lng]).addTo(overviewMap).bindPopup(`<b>${i+1}. ${s.name}</b>`);
-    });
-    overviewMap.fitBounds(routeLatLngs, {padding:[28,28]});
-    window.addEventListener('load',refreshOverviewMap);
-    window.addEventListener('resize',refreshOverviewMap);
-  } catch(error) {
-    document.getElementById('overviewMap').innerHTML = '<div style="padding:24px;text-align:center;color:#667085">Mappa temporaneamente non disponibile. Il programma e la navigazione restano consultabili.</div>';
-  }
-} else {
-  const mapEl = document.getElementById('overviewMap');
-  if(mapEl) mapEl.innerHTML = '<div style="padding:24px;text-align:center;color:#667085">Mappa temporaneamente non disponibile. Il programma e la navigazione restano consultabili.</div>';
-}
+L.polyline(routeLatLngs, {color:'#FF5A36', weight:3, dashArray:'6,8'}).addTo(overviewMap);
+ROUTE_STOPS.forEach((s,i)=>{
+  L.marker([s.lat, s.lng]).addTo(overviewMap).bindPopup(`<b>${i+1}. ${s.name}</b>`);
+});
+overviewMap.fitBounds(routeLatLngs, {padding:[28,28]});
+function refreshOverviewMap(){setTimeout(function(){overviewMap.invalidateSize();overviewMap.fitBounds(routeLatLngs,{padding:[36,36],maxZoom:6});},100);}
+window.addEventListener('load',refreshOverviewMap);
+window.addEventListener('resize',refreshOverviewMap);
 
 
 // Quickview table
