@@ -661,7 +661,7 @@ const DAYS = [
       ["06:00","Transfer hotel → aeroporto."],
       ["Mattina","✈️ Volo Bogotá → Leticia."],
       ["Arrivo","💵 Pagamento della tassa di soggiorno a Leticia (vedi box). Incontro con DMC."],
-      ["11:00–12:00","Transfer aeroporto → glamping (~30 min), check-in/pranzo."],
+      ["11:00–12:00","Transfer aeroporto → glamping (~30 min): pagamento alla DMC (vedi box), check-in/pranzo."],
       ["13:00–19:00","🌿 Finca Mambea: trekking nella foresta, incontro con sciamano, cultura indigena, preparazione/assaggio della mambea."],
       ["19:00–20:00","Rientro al glamping."],
       ["20:00","🍽️ Cena tipica."],
@@ -671,7 +671,8 @@ const DAYS = [
     todo:["Confermare programma con DMC.","Portare acqua 1,5–2 L, repellente, costume, asciugamano, sali minerali e torcia frontale."],
     notes:["Esperienza WILD: servizi più basic, telefono a tratti, prese limitate.","Acqua doccia tiepida."],
     contacts:[],
-    cashFee:{title:"TASSA DI SOGGIORNO — LETICIA",amount:"50.000 COP/pax",payment:"SOLO IN CONTANTI"}
+    cashFee:{title:"TASSA DI SOGGIORNO — LETICIA",amount:"50.000 COP/pax",payment:"SOLO IN CONTANTI"},
+    transferFee:{title:"TRANSFER AEROPORTO → GLAMPING",amount:"20 €/pax",payment:"DA PAGARE IN CONTANTI DIRETTAMENTE ALLA DMC"}
   },
   {
     id:4, date:"30 dic", dest:"Amazzonia", focus:"Rio delle Amazzoni + Riserva Marasha", map:"Reserva Natural Marasha, Amazonas, Colombia",
@@ -1024,6 +1025,12 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
           <strong>${d.cashFee.title}</strong>
           <div style="font-size:21px; font-weight:800; margin-top:6px;">${d.cashFee.amount}</div>
           <div style="margin-top:6px; font-weight:800; color:#C43B20;">${d.cashFee.payment}</div>
+        </div>` : ``}
+        ${d.transferFee ? `
+        <div class="note-box" style="margin:18px 0; padding:16px 18px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.07); border-radius:14px;">
+          <strong>${d.transferFee.title}</strong>
+          <div style="font-size:21px; font-weight:800; margin-top:6px;">${d.transferFee.amount}</div>
+          <div style="margin-top:6px; font-weight:800; color:#C43B20;">${d.transferFee.payment}</div>
         </div>` : ``}
         ${d.tourBooked ? `
         <div class="note-box" style="margin:18px 0; padding:16px 18px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.08); border-radius:14px;">
