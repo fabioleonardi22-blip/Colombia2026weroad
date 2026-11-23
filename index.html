@@ -909,9 +909,12 @@ function dayRouteLegs(d){
 function renderScheduleWithRoutes(d){
   const legs=dayRouteLegs(d);
   const items=d.schedule.map(([t,desc],i)=>`<li><div class="time">${t}</div><div class="desc">${desc}</div></li>`);
-  if(d.cashFee){
+  if(d.cashFee || d.fincaExcursion){
     const feeIndex=d.schedule.findIndex(([t])=>t==="13:00–19:00");
-    if(feeIndex>=0) items[feeIndex]+=`<div class="note-box" style="margin:10px 0 4px; padding:10px 14px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.07); border-radius:12px;"><strong style="font-size:12px;">${d.cashFee.title}</strong><div style="font-size:17px; font-weight:800; margin-top:4px;">${d.cashFee.amount}</div><div style="margin-top:4px; font-size:11px; font-weight:800; color:#C43B20;">${d.cashFee.payment}</div></div>`;
+    if(feeIndex>=0){
+      if(d.fincaExcursion) items[feeIndex]+=`<div class="note-box" style="margin:10px 0 8px; padding:14px 16px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.07); border-radius:14px;"><strong style="font-size:15px;">${d.fincaExcursion.title}</strong><div style="margin-top:9px; line-height:1.6; white-space:pre-line;">${d.fincaExcursion.body}</div></div>`;
+      if(d.cashFee) items[feeIndex]+=`<div class="note-box" style="margin:10px 0 4px; padding:10px 14px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.07); border-radius:12px;"><strong style="font-size:12px;">${d.cashFee.title}</strong><div style="font-size:17px; font-weight:800; margin-top:4px;">${d.cashFee.amount}</div><div style="margin-top:4px; font-size:11px; font-weight:800; color:#C43B20;">${d.cashFee.payment}</div></div>`;
+    }
   }
   if(!legs.length) return items.join('');
   const slots=[];
@@ -1037,11 +1040,6 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
           <strong style="font-size:12px;">${d.transferFee.title}</strong>
           <div style="font-size:17px; font-weight:800; margin-top:4px;">${d.transferFee.amount}</div>
           <div style="margin-top:4px; font-size:11px; font-weight:800; color:#C43B20;">${d.transferFee.payment}</div>
-        </div>` : ``}
-        ${d.fincaExcursion ? `
-        <div class="note-box" style="margin:18px 0; padding:18px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.07); border-radius:14px;">
-          <strong style="font-size:16px;">${d.fincaExcursion.title}</strong>
-          <div style="margin-top:10px; line-height:1.65; white-space:pre-line;">${d.fincaExcursion.body}</div>
         </div>` : ``}
         ${d.glampingNote ? `
         <div class="note-box" style="margin:18px 0; padding:18px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.07); border-radius:14px;">
