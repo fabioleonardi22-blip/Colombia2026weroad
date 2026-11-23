@@ -946,6 +946,12 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
     </div>
     <p class="day-sub">${d.focus}</p>
 
+    ${[3,4].includes(d.id) ? `
+    <div class="note-box" style="margin:18px 0;">
+      <strong>Nota organizzativa — Day 3 e Day 4</strong><br>
+      Il programma di queste due giornate può essere invertito, sia per quanto riguarda le attività sia per gli alloggi, in base alle condizioni climatiche o a qualsiasi altro fattore non prevedibile in anticipo.
+    </div>` : ``}
+
     <div class="grid">
       <div>
         <ul class="timeline">
