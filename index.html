@@ -801,14 +801,18 @@ Per cena e dopocena, fate riferimento alle opzioni indicate nel Day 7 a Medellí
       ["12:00–13:00","Arrivo, transfer in hotel e deposito bagagli prima della visita."],
       ["13:00–14:00","🍽️ Pranzo."],
       ["14:00–16:30","🏰 Ciudad Amurallada: El Centro, San Diego, piazze, Getsemaní e murales."],
-      ["16:30–17:00","Preparazione per il tramonto."],
-      ["17:00–18:30","⛵ Boat Sunset: open bar, musica e tramonto."],
+      ["16:30–17:00","Preparazione per il tramonto e scelta dell’opzione."],
+      ["17:00–18:30","⛵ OPZIONE 1 – Escursione in barca al tramonto con open bar (rientro indicativo 18:30–19:00). In alternativa, tramonto da terra al Castillo de San Felipe de Barajas, al Café del Mar o lungo le mura della Ciudad Amurallada."],
       ["19:30","🍽️ Cena."],
       ["22:30","🌙 Dopocena: Alquímico / Getsemaní / Mirador / Café Havana."]
     ],
     todo:[],
-    notes:["Nuovo suggerimento: Sambal — WA +57 318 090 3325, ottimo per il pesce.","Alternativa più economica: Casual Bistro Local — IG casual_bistro_local — WA +57 317 332 0733.","Boat sunset: indicativamente 165.000 COP/pax + TFL, più tassa porto 16.000 COP cash."],
-    contacts:[["Sambal","+57 318 090 3325"],["Casual Bistro Local","+57 317 332 0733"]]
+    sunsetInfo:{
+      title:"TRAMONTO A CARTAGENA · DUE POSSIBILITÀ",
+      body:"OPZIONE 1 – ESCURSIONE IN BARCA (17:00–18:30 circa)\\nContatto: Ester · +57 315 667 7611. Costo: 165.000 COP a persona (circa 45 €), pagabili direttamente a bordo anche con carta. È prevista inoltre una tassa di ingresso al porto di 16.000 COP (circa 4,30 €), da pagare in contanti.\\n\\nL’escursione non è privata: è un’esperienza di gruppo con open bar, che comprende un drink tipico a base di rum, birre e alcuni cocktail (non sono disponibili gin tonic o richieste particolari). Si naviga al tramonto, con musica, e si rientra indicativamente tra le 18:30 e le 19:00. Durante il giro non è possibile fare il bagno.\\n\\nOPZIONE 2 – TRAMONTO DA TERRA\\nSi può scegliere il Castillo de San Felipe de Barajas oppure il Café del Mar. Per questi locali/luoghi è consigliabile prenotare con largo anticipo oppure arrivare in un orario poco affollato, entro le 16:30. In alternativa, anche senza prenotazione, è molto suggestivo passeggiare lungo le mura della Ciudad Amurallada: si può salire tramite le apposite scale e ammirare il tramonto sul mare."
+    },
+    notes:["Nuovo suggerimento: Sambal — WA +57 318 090 3325, ottimo per il pesce.","Alternativa più economica: Casual Bistro Local — IG casual_bistro_local — WA +57 317 332 0733."],
+    contacts:[["Ester – tour Cartagena / boat sunset","+57 315 667 7611"],["Sambal","+57 318 090 3325"],["Casual Bistro Local","+57 317 332 0733"]]
   },
   {
     id:10, date:"5 gen", dest:"San Andrés", focus:"Cartagena → San Andrés + mare", map:"Spratt Bay, San Andres, Colombia",
@@ -1044,6 +1048,11 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
     <div class="note-box" style="margin:16px 0 20px; padding:18px 20px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.08); border-radius:14px; line-height:1.65; color:var(--text); white-space:pre-line;">
       <strong style="display:block; margin-bottom:8px; color:var(--jade); letter-spacing:.03em;">${d.cartagenaInfo.title}</strong>
       ${d.cartagenaInfo.body}
+    </div>` : ``}
+    ${d.sunsetInfo ? `
+    <div class="note-box" style="margin:16px 0 20px; padding:18px 20px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.08); border-radius:14px; line-height:1.65; color:var(--text); white-space:pre-line;">
+      <strong style="display:block; margin-bottom:8px; color:var(--jade); letter-spacing:.03em;">${d.sunsetInfo.title}</strong>
+      ${d.sunsetInfo.body}
     </div>` : ``}
     ${d.topNote ? `
     <div class="note-box" style="margin:14px 0 18px; padding:16px 18px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.09); border-radius:14px; line-height:1.6;">
