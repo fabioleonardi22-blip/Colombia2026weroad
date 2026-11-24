@@ -478,6 +478,17 @@ body{font-size:var(--type-body)!important;line-height:1.6;font-weight:400!import
 .panel .contacts-table strong,.panel .contacts-table b,
 .panel .note-box strong,.panel .note-box b{font-weight:700!important}
 
+/* Box speciali: stesso trattamento tipografico in tutte le giornate */
+.panel .schedule-detail-box,.panel .schedule-detail-box .schedule-detail-body{
+  font-family:var(--font-body)!important;font-size:var(--type-body)!important;
+  line-height:1.6!important;font-weight:400!important;
+}
+.panel .schedule-detail-box .schedule-detail-title{
+  display:block;font-family:var(--font-body)!important;
+  font-size:var(--type-body)!important;line-height:1.4!important;
+  font-weight:700!important;margin-bottom:7px;
+}
+.panel .schedule-detail-box .schedule-detail-body *{font-weight:400!important}
 /* Orari, etichette e comandi: Inter 14px, peso regolare */
 .panel .timeline .time,
 .panel .side-card h4,
@@ -1040,7 +1051,7 @@ function dayRouteLegs(d){
 }
 function renderScheduleWithRoutes(d){
   const legs=dayRouteLegs(d);
-  const items=d.schedule.map(([t,desc],i)=>{const extra=d.scheduleDetails?.[t];return `<li><div class="time">${t}</div><div class="desc">${desc}</div>${extra?`<div class="note-box" style="margin:10px 0 8px; padding:14px 16px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.07); border-radius:14px; line-height:1.6; white-space:pre-line;"><strong style="display:block; margin-bottom:7px;"><strong style="display:block; margin-bottom:7px;">${extra.split("\n")[0]}</strong>${extra.slice(extra.indexOf("\n")+1)}</div>`:""}</li>`;});
+  const items=d.schedule.map(([t,desc],i)=>{const extra=d.scheduleDetails?.[t];return `<li><div class="time">${t}</div><div class="desc">${desc}</div>${extra?`<div class="note-box schedule-detail-box" style="margin:10px 0 8px; padding:14px 16px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.07); border-radius:14px; line-height:1.6; white-space:pre-line;"><strong class="schedule-detail-title">${extra.split("\n")[0]}</strong><div class="schedule-detail-body">${extra.slice(extra.indexOf("\n")+1)}</div></div>`:""}</li>`;});
   if(d.cashFee || d.fincaExcursion){
     const feeIndex=d.schedule.findIndex(([t])=>t==="13:00–19:00");
     if(feeIndex>=0){
