@@ -980,19 +980,15 @@ const DAYS = [
     contacts:[["San Andrés Vibes","+57 315 303 9469"]]
   },
   {
-    id:13, date:"8 gen", dest:"San Andrés", focus:"Johnny Cay + ultimo tramonto + cena finale", map:"Johnny Cay, San Andres, Colombia",
+    id:13, date:"8 gen", dest:"San Andrés", focus:"Saluti e partenza", map:"Gustavo Rojas Pinilla International Airport, San Andrés, Colombia",
     schedule:[
-      ["08:00","Colazione."],
-      ["09:00","Partenza per Johnny Cay."],
-      ["09:30–13:00","🏝️ Johnny Cay: spiaggia, bagno e relax."],
-      ["13:30","🍽️ Pranzo."],
-      ["15:00–17:00","🏖️ Ultimo pomeriggio di mare: Spratt Bay / Rocky Cay / Playa San Luis."],
-      ["17:30","🌅 Ultimo tramonto: Booby Rock oppure Massaly Ocean Lounge."],
-      ["19:30","🍽️ Cena finale del gruppo."],
-      ["21:30","🥂 Ultimo drink e saluti."]
+      ["Mattina","Colazione e preparazione dei bagagli."],
+      ["Check-out","Rilascio delle camere secondo gli orari dell'hotel."],
+      ["Partenza","Transfer verso l'aeroporto in base agli orari dei voli."],
+      ["Aeroporto","Check-in, saluti e partenze del gruppo."]
     ],
-    todo:[],
-    notes:["Johnny Cay è raggiungibile in circa 10 minuti di lancha."],
+    todo:["Verificare gli orari dei voli e organizzare i transfer per l'aeroporto in base alle singole partenze."],
+    notes:["Giornata dedicata esclusivamente a check-out, saluti e partenza. Nessuna escursione o attività programmata."],
     contacts:[]
   }
 ];
@@ -1033,7 +1029,7 @@ const GOOGLE_ROUTES={
 10:["Rafael Núñez International Airport, Cartagena, Colombia","Spratt Bay, San Andrés, Colombia",["Gustavo Rojas Pinilla International Airport, San Andrés, Colombia"]],
 11:["Spratt Bay, San Andrés, Colombia","Cayo Acuario, San Andrés, Colombia",[]],
 12:["Spratt Bay, San Andrés, Colombia","Johnny Cay, San Andrés, Colombia",[]],
-13:["Spratt Bay, San Andrés, Colombia","Johnny Cay, San Andrés, Colombia",[]]};
+13:["Spratt Bay, San Andrés, Colombia","Gustavo Rojas Pinilla International Airport, San Andrés, Colombia",[]]};
 function routeForDay(d){const r=GOOGLE_ROUTES[d.id];return r?googleDirections(r[0],r[1],r[2]):googleSearch(d.map);}
 function routeEmbedForDay(d){const r=GOOGLE_ROUTES[d.id];return r?googleDirectionsEmbed(r[0],r[1],r[2]):mapEmbed(d.map);}
 function legMode(from,to,d){
