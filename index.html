@@ -609,23 +609,20 @@ const DAYS = [
       ["13:00–15:00","🛬 Arrivo a Bogotá → transfer verso hotel → check-in."],
       ["15:00–16:00","Sistemazione, pausa e distribuzione informazioni al gruppo."],
       ["16:00–18:30","🚶 Passeggiata a La Candelaria: Plaza Bolívar, Chorro de Quevedo, murales e vie del centro."],
-      ["19:30","Meeting del gruppo."],
-      ["20:00","🍽️ Cena di benvenuto: prenotazione confermata. Presentarsi 15 minuti prima."],
+      ["18:00","🤝 Ritrovo del gruppo."],
+      ["19:30","🍽️ Cena prenotata da San Valentín Cocina & Tragos: cucina, musica dal vivo e spettacolo. Se volete stare vicino al palco, chiedete un tavolo al piano inferiore."],
       ["22:30","🌙 Dopocena: La Candelaria per una serata easy oppure Zona T / Zona Rosa se il gruppo ha energie."]
     ],
-    todo:["Prenotare la cena di benvenuto. Origen Bistró: WA +57 310 5548665.","Alternative: Casa Matilde Cocina & Whisky (+57 321 2223272) e Gato Gris."],
-    notes:["Uber è consigliato per gli spostamenti.","Macondo fornisce una SIM colombiana inclusa, da trovare direttamente in hotel."],
-    contacts:[["Origen Bistró","+57 310 5548665"],["Casa Matilde","+57 321 2223272"]],
-    reservation:{
-      title:"Tu reserva está confirmada.",
-      name:"Fabio Leonardi",
-      date:"2026-12-27",
-      time:"8:00 p. m.",
-      people:"17",
-      note:"Sin notas adicionales",
-      phone:"+393397578967",
-      code:"BEDB1AD4",
-      reminder:"Recuerda llegar 15 minutos antes de la hora reservada."
+    todo:[],
+    notes:["Uber è consigliato per gli spostamenti.","Macondo fornisce una SIM colombiana inclusa, da trovare direttamente in hotel.","San Valentín: il ristorante propone musica dal vivo e spettacolo. Per avere il palco più vicino, chiedere un tavolo al piano inferiore."],
+    contacts:[["San Valentín Cocina & Tragos","WhatsApp: +57 310 415 3330"]],
+    dinnerInfo:{
+      title:"Cena prenotata · San Valentín Cocina & Tragos",
+      time:"19:30",
+      description:"Si mangia bene e la serata prevede musica dal vivo con spettacolo.",
+      seating:"Se volete avere il palco vicino, chiedete un tavolo al piano di sotto.",
+      whatsapp:"+57 310 415 3330",
+      menu:"Menù del ristorante allegato alla conversazione."
     }
   },
   {
@@ -1049,6 +1046,15 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
       <strong style="display:block; margin-bottom:8px; color:var(--jade); letter-spacing:.03em;">${d.cartagenaInfo.title}</strong>
       ${d.cartagenaInfo.body}
     </div>` : ``}
+    ${d.dinnerInfo ? `
+    <div class="note-box" style="margin:16px 0 20px; padding:18px 20px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.08); border-radius:14px; line-height:1.65; color:var(--text);">
+      <strong style="display:block; margin-bottom:8px; color:var(--jade); letter-spacing:.03em;">${d.dinnerInfo.title}</strong>
+      <p style="margin:5px 0;"><b>Orario:</b> ${d.dinnerInfo.time}</p>
+      <p style="margin:5px 0;">${d.dinnerInfo.description}</p>
+      <p style="margin:5px 0;">${d.dinnerInfo.seating}</p>
+      <p style="margin:5px 0;"><b>WhatsApp:</b> <a href="https://wa.me/573104153330" target="_blank" rel="noopener" style="color:var(--jade);font-weight:700;">${d.dinnerInfo.whatsapp}</a></p>
+      <p style="margin:8px 0 0; font-size:12px; color:var(--text-soft);">${d.dinnerInfo.menu}</p>
+    </div>` : ` `}
     ${d.sunsetInfo ? `
     <div class="note-box" style="margin:16px 0 20px; padding:18px 20px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.08); border-radius:14px; line-height:1.65; color:var(--text); white-space:pre-line;">
       <strong style="display:block; margin-bottom:8px; color:var(--jade); letter-spacing:.03em;">${d.sunsetInfo.title}</strong>
