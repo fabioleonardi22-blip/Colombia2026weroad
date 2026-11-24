@@ -804,13 +804,21 @@ const DAYS = [
       ["14:00–16:30","🏰 Ciudad Amurallada: visita di El Centro, San Diego, piazze, Getsemaní e murales."],
       ["16:30–17:00","Preparazione per il tramonto e scelta dell'opzione."],
       ["17:00–18:30","⛵ OPZIONE 1 – Escursione in barca al tramonto con open bar e musica. Rientro indicativo 18:30–19:00. In alternativa, tramonto da terra."],
-      ["19:30","🍽️ Cena da San Valentín."],
+      ["19:30","🍽️ Cena da San Valentín. Prenotazione confermata per 15 persone, intestata a Fabio Leonardi (riferimento SV07212)."],
       ["22:30","🌙 Dopocena: Alquímico / Getsemaní / Mirador / Café Havana."]
     ],
     scheduleDetails:{
       "12:00–13:00":"ARRIVO E DEPOSITO BAGAGLI\nLa DMC vi accompagnerà in hotel per lasciare i bagagli e sistemarvi prima di iniziare la visita della città.",
       "14:00–16:30":"ALLA SCOPERTA DELLA CITTÀ VECCHIA\nEl Centro era storicamente il quartiere delle famiglie più agiate; San Diego era abitato soprattutto da commercianti e borghesia. Il tempo a disposizione a Cartagena è limitato: se l'hotel dispone di piscina, valutate di trascorrere lì le ore più calde e visitare la città nelle ore più piacevoli.",
       "17:00–18:30":"OPZIONE 1 – ESCURSIONE IN BARCA AL TRAMONTO\nContatto: Ester · +57 315 667 7611. Costo: 165.000 COP a persona (circa 45 €), pagabili direttamente a bordo anche con carta. È prevista inoltre una tassa di ingresso al porto di 16.000 COP (circa 4,30 €), da pagare in contanti.\n\nL'escursione è condivisa, non privata, e comprende open bar con un drink tipico a base di rum, birre e alcuni cocktail. Non sono disponibili gin tonic o richieste particolari. Si naviga con musica e vista sul tramonto; non è possibile fare il bagno. Rientro indicativo tra le 18:30 e le 19:00.\n\nOPZIONE 2 – TRAMONTO DA TERRA\nIn alternativa si può scegliere il Castillo de San Felipe de Barajas o il Café del Mar: è consigliabile prenotare con largo anticipo oppure arrivare entro le 16:30. Un'altra possibilità è passeggiare sulle mura della Ciudad Amurallada e ammirare il tramonto sul mare."
+    },
+    reservation:{
+      title:"PRENOTAZIONE CONFERMATA · SAN VALENTÍN",
+      code:"SV07212",date:"4 gennaio 2027",time:"19:30",people:"15",
+      zone:"Por asignar (da assegnare)",celebration:"Otro",
+      name:"Fabio Leonardi",email:"fabioleonardi22@gmail.com",
+      qrImage:"data:image/png;base64,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",
+      reminder:"Presentare questo codice QR all'arrivo al ristorante."
     },
     todo:[],
     notes:[
@@ -1097,13 +1105,19 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
         <div class="note-box" style="margin:18px 0; padding:18px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.08); border-radius:14px;">
           <strong style="font-size:16px;">${d.reservation.title}</strong>
           <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 16px; margin-top:12px;">
-            <div><small>Nombre</small><br><b>${d.reservation.name}</b></div>
-            <div><small>Fecha</small><br><b>${d.reservation.date}</b></div>
-            <div><small>Hora</small><br><b>${d.reservation.time}</b></div>
-            <div><small>Número de personas</small><br><b>${d.reservation.people}</b></div>
-            <div><small>Nota</small><br><b>${d.reservation.note}</b></div>
-            <div><small>Teléfono</small><br><b>${d.reservation.phone}</b></div>
-            <div><small>Código de reserva</small><br><b>${d.reservation.code}</b></div>
+            <div><small>REFERENCIA</small><br><b>${d.reservation.code}</b></div>
+            <div><small>FECHA</small><br><b>${d.reservation.date}</b></div>
+            <div><small>HORA</small><br><b>${d.reservation.time}</b></div>
+            <div><small>COMENSALES</small><br><b>${d.reservation.people}</b></div>
+            <div><small>ZONA</small><br><b>${d.reservation.zone}</b></div>
+            <div><small>CELEBRACIÓN</small><br><b>${d.reservation.celebration}</b></div>
+            <div><small>TITULAR</small><br><b>${d.reservation.name}</b></div>
+            <div><small>CORREO</small><br><b>${d.reservation.email}</b></div>
+          </div>
+          <div style="margin:16px auto 0; padding:16px; max-width:320px; text-align:center; background:#fff; border:1px solid #ddd; border-radius:10px;">
+            <div style="font-size:11px; letter-spacing:1.4px; font-weight:700; color:#888;">TU CÓDIGO QR DE CHECK-IN</div>
+            <img src="${d.reservation.qrImage}" alt="QR check-in reserva SV07212" style="display:block; width:100%; max-width:220px; height:auto; margin:12px auto;">
+            <div style="font-size:11px; color:#888;">Presenta este código al llegar al restaurante.</div>
           </div>
           <p style="margin:12px 0 0;"><b>${d.reservation.reminder}</b></p>
         </div>` : ``}
