@@ -413,75 +413,72 @@ html,body{max-width:100%;overflow-x:hidden}
 /* Day 9 now follows the shared site typography system. */
 
 /* =========================================================
-   SITE TYPOGRAPHY SYSTEM — shared visual rhythm
-   Display/headings: Georgia. Interface and reading: Inter.
+   TYPOGRAPHY SYSTEM v2 — consistent across all pages and days
+   Display: Georgia | Reading/UI: Inter
    ========================================================= */
 :root{
   --font-body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --font-display:Georgia,"Iowan Old Style","Palatino Linotype",serif;
-  --type-body:14.5px;
-  --type-small:12.5px;
-  --type-lead:16px;
+  --type-body:15px;
+  --type-small:12px;
   --type-h2:28px;
-  --type-h3:23px;
+  --type-h3:22px;
 }
-html,body,button,input,select,textarea{
-  font-family:var(--font-body);
-}
-body{font-size:var(--type-body);line-height:1.6}
-h1,h2,h3,h4,
-.hero h1,.day-head h2,.home-title,.home-section-head h3,
+html,body,button,input,select,textarea{font-family:var(--font-body)}
+body{font-size:var(--type-body);line-height:1.6;font-weight:400}
+h1,h2,h3,h4,.hero h1,.day-head h2,.home-title,.home-section-head h3,
 .merged-head h3,.destination-body h4,.zone-card h4{
-  font-family:var(--font-display)!important;
-  font-weight:700;
-  line-height:1.15;
+  font-family:var(--font-display)!important;font-weight:700;line-height:1.15;
 }
+/* Stable heading scale */
 .hero h1{font-size:clamp(36px,5vw,54px)}
 .day-head h2{font-size:var(--type-h2)}
 .home-title{font-size:clamp(32px,4.5vw,52px)}
 .home-section-head h3,.merged-head h3{font-size:var(--type-h3)}
-/* Every day panel uses the same reading font and base rhythm. */
-.panel,.panel *{
-  font-family:var(--font-body);
-}
+/* Shared reading rules for every itinerary day */
+.panel,.panel *{font-family:var(--font-body)}
 .panel h1,.panel h2,.panel h3,.panel h4,
 .panel .destination-body h4,.panel .zone-card h4{
-  font-family:var(--font-display)!important;
+  font-family:var(--font-display)!important;font-weight:700;
 }
 .panel .day-head h2{font-size:var(--type-h2)}
-.panel .timeline .time{
-  font-size:var(--type-small);
-  line-height:1.4;
-  font-weight:700;
-}
+.panel .timeline .time{font-size:var(--type-small);line-height:1.4;font-weight:700}
 .panel .timeline .desc,
+.panel .timeline .desc *,
 .panel .timeline .note-box,
+.panel .timeline .note-box *,
 .panel .side-card p,
+.panel .side-card p *,
 .panel .side-card li,
+.panel .side-card li *,
 .panel .contact-row,
+.panel .contact-row *,
 .panel .checklist li,
+.panel .checklist li *,
 .panel .contacts-table,
-.panel .note-box{
-  font-size:var(--type-body);
-  line-height:1.6;
+.panel .contacts-table *,
+.panel .note-box,
+.panel .note-box *{
+  font-size:var(--type-body);line-height:1.6;font-weight:400;
 }
-.panel .timeline .desc{font-weight:500}
-.panel .timeline .note-box,
-.panel .side-card p,
-.panel .side-card li{font-weight:400}
+/* Bold is semantic and consistent, never inherited accidentally */
+.panel .timeline .desc strong,.panel .timeline .desc b,
+.panel .timeline .note-box strong,.panel .timeline .note-box b,
+.panel .side-card strong,.panel .side-card b,
+.panel .contact-row strong,.panel .contact-row b,
+.panel .checklist strong,.panel .checklist b,
+.panel .contacts-table strong,.panel .contacts-table b,
+.panel .note-box strong,.panel .note-box b{font-weight:700}
 .panel .side-card h4{
-  font-family:var(--font-body)!important;
-  font-size:var(--type-small);
-  font-weight:700;
-  letter-spacing:.07em;
+  font-family:var(--font-body)!important;font-size:var(--type-small);
+  font-weight:700;letter-spacing:.07em;
 }
 .panel .route-leg-card b{font-size:var(--type-small);font-weight:700}
 .panel .route-leg-card small{font-size:10px}
-.panel .route-leg-card a{font-size:var(--type-small)}
-.panel strong,.panel b{font-weight:700}
+.panel .route-leg-card a{font-size:var(--type-small);font-weight:700}
 .panel .tag-optional,.panel .tag-todo{font-weight:700}
 @media(max-width:600px){
-  :root{--type-body:14px;--type-h2:25px;--type-h3:21px}
+  :root{--type-body:14px;--type-h2:25px;--type-h3:20px}
   body{line-height:1.55}
 }
 </style>
