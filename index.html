@@ -792,9 +792,13 @@ Per cena e dopocena, fate riferimento alle opzioni indicate nel Day 7 a Medellí
   },
   {
     id:9, date:"4 gen", dest:"Cartagena", focus:"Ciudad Amurallada + sunset boat + serata", map:"Ciudad Amurallada, Cartagena, Colombia",
+    cartagenaInfo:{
+      title:"CARTAGENA · VISITA DELLA CITTÀ E CONSIGLI",
+      body:"La DMC vi accompagnerà in hotel per lasciare i bagagli e sistemarvi prima di visitare la Città Vecchia.\n\nScoprirete El Centro, un tempo quartiere delle famiglie più agiate, e San Diego, storicamente abitato dai commercianti e dalla borghesia.\n\nIl tempo a disposizione a Cartagena sarà piuttosto limitato. Se l’hotel dispone di piscina, valutate di trascorrere lì le ore più calde della giornata, per poi dedicarvi alla visita nelle ore più piacevoli."
+    },
     schedule:[
       ["Mattina","✈️ Volo Medellín → Cartagena. Arrivare in aeroporto circa 2 h prima."],
-      ["12:00–13:00","Arrivo, transfer, deposito bagagli/check-in."],
+      ["12:00–13:00","Arrivo, transfer in hotel e deposito bagagli prima della visita."],
       ["13:00–14:00","🍽️ Pranzo."],
       ["14:00–16:30","🏰 Ciudad Amurallada: El Centro, San Diego, piazze, Getsemaní e murales."],
       ["16:30–17:00","Preparazione per il tramonto."],
@@ -1036,6 +1040,11 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
       <span class="destchip" style="background:rgba(255,90,54,0.12); color:#E23F1F;">${d.date}</span>
     </div>
     <p class="day-sub">${d.focus}</p>
+    ${d.cartagenaInfo ? `
+    <div class="note-box" style="margin:16px 0 20px; padding:18px 20px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.08); border-radius:14px; line-height:1.65; color:var(--text); white-space:pre-line;">
+      <strong style="display:block; margin-bottom:8px; color:var(--jade); letter-spacing:.03em;">${d.cartagenaInfo.title}</strong>
+      ${d.cartagenaInfo.body}
+    </div>` : ``}
     ${d.topNote ? `
     <div class="note-box" style="margin:14px 0 18px; padding:16px 18px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.09); border-radius:14px; line-height:1.6;">
       <strong style="display:block; margin-bottom:6px; color:#C43B20;">NOTE PER L’ESCURSIONE</strong>
