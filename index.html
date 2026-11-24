@@ -413,73 +413,93 @@ html,body{max-width:100%;overflow-x:hidden}
 /* Day 9 now follows the shared site typography system. */
 
 /* =========================================================
-   TYPOGRAPHY SYSTEM v2 — consistent across all pages and days
-   Display: Georgia | Reading/UI: Inter
+   TYPOGRAPHY SYSTEM v3 — gerarchia editoriale condivisa
+   Titoli: Georgia | Testi e interfaccia: Inter
    ========================================================= */
 :root{
   --font-body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --font-display:Georgia,"Iowan Old Style","Palatino Linotype",serif;
-  --type-body:15px;
-  --type-small:12px;
-  --type-h2:28px;
-  --type-h3:22px;
+  --type-title-min:36px;
+  --type-title-max:54px;
+  --type-day:28px;
+  --type-section:22px;
+  --type-body:16px;
+  --type-operational:14px;
 }
-html,body,button,input,select,textarea{font-family:var(--font-body)}
-body{font-size:var(--type-body);line-height:1.6;font-weight:400}
-h1,h2,h3,h4,.hero h1,.day-head h2,.home-title,.home-section-head h3,
-.merged-head h3,.destination-body h4,.zone-card h4{
-  font-family:var(--font-display)!important;font-weight:700;line-height:1.15;
+html,body,button,input,select,textarea{font-family:var(--font-body)!important}
+body{font-size:var(--type-body)!important;line-height:1.6;font-weight:400!important}
+
+/* Titoli principali */
+.hero h1,.home-title{
+  font-family:var(--font-display)!important;
+  font-size:clamp(var(--type-title-min),5vw,var(--type-title-max))!important;
+  font-weight:700!important;line-height:1.12;
 }
-/* Stable heading scale */
-.hero h1{font-size:clamp(36px,5vw,54px)}
-.day-head h2{font-size:var(--type-h2)}
-.home-title{font-size:clamp(32px,4.5vw,52px)}
-.home-section-head h3,.merged-head h3{font-size:var(--type-h3)}
-/* Shared reading rules for every itinerary day */
-.panel,.panel *{font-family:var(--font-body)}
-.panel h1,.panel h2,.panel h3,.panel h4,
+/* Titoli delle giornate */
+.day-head h2{
+  font-family:var(--font-display)!important;
+  font-size:var(--type-day)!important;
+  font-weight:700!important;line-height:1.15;
+}
+/* Capitoli e sezioni */
+.home-section-head h3,.home-section h3,.merged-head h3,
+.destination-body h4,.zone-card h4{
+  font-family:var(--font-display)!important;
+  font-size:var(--type-section)!important;
+  font-weight:700!important;line-height:1.2;
+}
+/* Tutti i testi descrittivi: stessa misura e peso in ogni giornata */
+.panel,.panel *{font-family:var(--font-body)!important}
+.panel .day-head h2,.panel h2,.panel h3,.panel h4,
 .panel .destination-body h4,.panel .zone-card h4{
-  font-family:var(--font-display)!important;font-weight:700;
+  font-family:var(--font-display)!important;
 }
-.panel .day-head h2{font-size:var(--type-h2)}
-.panel .timeline .time{font-size:var(--type-small);line-height:1.4;font-weight:700}
-.panel .timeline .desc,
-.panel .timeline .desc *,
-.panel .timeline .note-box,
-.panel .timeline .note-box *,
-.panel .side-card p,
-.panel .side-card p *,
-.panel .side-card li,
-.panel .side-card li *,
-.panel .contact-row,
-.panel .contact-row *,
-.panel .checklist li,
-.panel .checklist li *,
-.panel .contacts-table,
-.panel .contacts-table *,
-.panel .note-box,
-.panel .note-box *{
-  font-size:var(--type-body);line-height:1.6;font-weight:400;
+.panel .day-head h2{font-size:var(--type-day)!important;font-weight:700!important}
+.panel .day-sub,
+.panel .timeline .desc,.panel .timeline .desc *,
+.panel .timeline .note-box,.panel .timeline .note-box *,
+.panel .side-card p,.panel .side-card p *,
+.panel .side-card li,.panel .side-card li *,
+.panel .contact-row,.panel .contact-row *,
+.panel .checklist li,.panel .checklist li *,
+.panel .contacts-table,.panel .contacts-table *,
+.panel .note-box,.panel .note-box *,
+.panel .glamping-note,.panel .destination-body p,.panel .zone-card p{
+  font-size:var(--type-body)!important;
+  line-height:1.6!important;
+  font-weight:400!important;
 }
-/* Bold is semantic and consistent, never inherited accidentally */
+/* Il grassetto compare solo dove il contenuto lo marca semanticamente */
 .panel .timeline .desc strong,.panel .timeline .desc b,
 .panel .timeline .note-box strong,.panel .timeline .note-box b,
 .panel .side-card strong,.panel .side-card b,
 .panel .contact-row strong,.panel .contact-row b,
 .panel .checklist strong,.panel .checklist b,
 .panel .contacts-table strong,.panel .contacts-table b,
-.panel .note-box strong,.panel .note-box b{font-weight:700}
-.panel .side-card h4{
-  font-family:var(--font-body)!important;font-size:var(--type-small);
-  font-weight:700;letter-spacing:.07em;
+.panel .note-box strong,.panel .note-box b{font-weight:700!important}
+
+/* Orari, etichette e comandi: Inter 14px, peso regolare */
+.panel .timeline .time,
+.panel .side-card h4,
+.panel .route-leg-card,
+.panel .route-leg-card *,
+.panel .tag-optional,.panel .tag-todo,
+.panel .destchip,.panel .map-btn,
+.panel .navbtn .lbl,.panel .navbtn .val{
+  font-family:var(--font-body)!important;
+  font-size:var(--type-operational)!important;
+  font-weight:400!important;
+  line-height:1.4!important;
 }
-.panel .route-leg-card b{font-size:var(--type-small);font-weight:700}
-.panel .route-leg-card small{font-size:10px}
-.panel .route-leg-card a{font-size:var(--type-small);font-weight:700}
-.panel .tag-optional,.panel .tag-todo{font-weight:700}
+.panel .route-leg-card b,.panel .route-leg-card a{font-weight:400!important}
+.panel .side-card h4{text-transform:uppercase;letter-spacing:.06em}
 @media(max-width:600px){
-  :root{--type-body:14px;--type-h2:25px;--type-h3:20px}
-  body{line-height:1.55}
+  :root{--type-body:14px}
+  body{font-size:14px!important;line-height:1.55}
+  .hero h1,.home-title{font-size:clamp(36px,8vw,46px)!important}
+  .day-head h2,.panel .day-head h2{font-size:28px!important}
+  .home-section-head h3,.home-section h3,.merged-head h3,
+  .destination-body h4,.zone-card h4{font-size:22px!important}
 }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
