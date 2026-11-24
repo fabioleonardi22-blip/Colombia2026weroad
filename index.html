@@ -1031,8 +1031,8 @@ const GOOGLE_ROUTES={
 8:["Medellín, Colombia","Guatapé, Colombia",["Piedra del Peñol, Guatapé, Colombia"]],
 9:["José María Córdova International Airport, Colombia","Ciudad Amurallada, Cartagena, Colombia",["Rafael Núñez International Airport, Cartagena, Colombia"]],
 10:["Rafael Núñez International Airport, Cartagena, Colombia","Spratt Bay, San Andrés, Colombia",["Gustavo Rojas Pinilla International Airport, San Andrés, Colombia"]],
-11:["Spratt Bay, San Andrés, Colombia","Banda Dive, San Andrés, Colombia",[]],
-12:["Spratt Bay, San Andrés, Colombia","Cayo Acuario, San Andrés, Colombia",[]],
+11:["Spratt Bay, San Andrés, Colombia","Cayo Acuario, San Andrés, Colombia",[]],
+12:["Spratt Bay, San Andrés, Colombia","Johnny Cay, San Andrés, Colombia",[]],
 13:["Spratt Bay, San Andrés, Colombia","Johnny Cay, San Andrés, Colombia",[]]};
 function routeForDay(d){const r=GOOGLE_ROUTES[d.id];return r?googleDirections(r[0],r[1],r[2]):googleSearch(d.map);}
 function routeEmbedForDay(d){const r=GOOGLE_ROUTES[d.id];return r?googleDirectionsEmbed(r[0],r[1],r[2]):mapEmbed(d.map);}
