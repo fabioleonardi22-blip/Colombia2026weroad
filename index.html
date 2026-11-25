@@ -156,6 +156,10 @@
   .day-head h2{ font-size:28px; }
   .day-head .destchip{ position:relative; top:-2px; }
   .day-sub{ color: var(--text-soft); margin-top:4px; font-size:14.5px; }
+  .birthday-box{margin:18px 0 22px;padding:18px 20px;border-radius:14px;background:linear-gradient(135deg,#b91c1c,#dc2626);color:#fff;box-shadow:0 8px 22px rgba(153,27,27,.18);display:flex;flex-direction:column;gap:4px;text-align:center}
+  .birthday-box .birthday-label{font-size:11px;font-weight:800;letter-spacing:.12em;opacity:.9}
+  .birthday-box strong{font-family:Georgia,serif;font-size:clamp(20px,3vw,27px);letter-spacing:.02em}
+  .birthday-box span:last-child{font-size:14px;font-weight:600}
 
   .grid{
     display:grid; grid-template-columns: 1.3fr 1fr; gap:28px; margin-top:28px;
@@ -1154,6 +1158,8 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
       <span class="destchip" style="background:rgba(255,90,54,0.12); color:#E23F1F;">${d.date}</span>
     </div>
     <p class="day-sub">${d.focus}</p>
+    ${d.id === 2 ? `<div class="birthday-box"><span class="birthday-label">🎂 OGGI SI FESTEGGIA</span><strong>DANIELA STUCCHI</strong><span>Buon compleanno! 🥳</span></div>` : ""}
+    ${d.id === 3 ? `<div class="birthday-box"><span class="birthday-label">🎂 OGGI SI FESTEGGIA</span><strong>Onofrio Marco Sciortino</strong><span>Buon compleanno! 🥳</span></div>` : ""}
     ${d.topNote ? `
     <div class="note-box" style="margin:14px 0 18px; padding:16px 18px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.09); border-radius:14px; line-height:1.6;">
       <strong style="display:block; margin-bottom:6px; color:#C43B20;">NOTE PER L’ESCURSIONE</strong>
