@@ -1298,7 +1298,7 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
         ${d.contacts && d.contacts.length ? `
         <div class="side-card">
           <h4>Contatti</h4>
-          ${d.contacts.map(c=>`<div class="contact-row"><span>${c[0]}</span>${/^https?:\\/\\//.test(c[1]) ? `<a href="${c[1]}" target="_blank" rel="noopener">Apri link ↗</a>` : `<a href="#">${c[1]}</a>`}</div>`).join('')}
+          ${d.contacts.map(c=>`<div class="contact-row"><span>${c[0]}</span>${c[1].startsWith("http") ? `<a href="${c[1]}" target="_blank" rel="noopener">Apri link ↗</a>` : `<a href="#">${c[1]}</a>`}</div>`).join('')}
         </div>` : ``}
       </div>
     </div>
