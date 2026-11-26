@@ -982,9 +982,11 @@ const DAYS = [
       ["13:00","🍽️ Pranzo."],
       ["14:30–17:30","🏖️ Spratt Bay: mare e relax."],
       ["18:00","🌅 Tramonto."],
-      ["20:00","🍽️ Cena: La Regatta / Cocoplum / Casa Blanca / Boca de Oro / Pizzetta Florio / Feedom."],
+      ["20:00","🍽️ Cena da Bocca de Oro — prenotazione in sospeso per 17 persone."],
       ["22:30","🌙 Serata: Coco Loco / Typical / Caribbean / Neptuno / Island Dream / Lighthouse."]
     ],
+    restaurantName:"Bocca de Oro", restaurantMenuUrl:"https://idmenu.club/boccadeoro/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAcGRvZgJzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaf6ZjXQ6e9lqG6t-XymCKuAvyZ9bZmdA8nAuznmqY10V56vtjoZEjAfoHOtNQ_aem_-bqw8F_8FIn89JEGyIm2Kg", restaurantMapsUrl:"https://maps.google.com/maps?saddr=&daddr=Av%20Francisco%20Newball%20Frente%20Al%20Parque%20La%20Baracuda,%20San%20Andres,%20Isola%20di%20San%20Andr%C3%A9s%20880001%20Colombia@12.581213,-81.69283",
+    reservation:{title:"⚠️ Prenotazione in sospeso",status:"pending",date:"2027-01-05",time:"8:00 p. m.",people:"17",zone:"Av. Francisco Newball, frente al Parque La Baracuda — San Andrés, Colombia",celebration:"Cena di gruppo",name:"Fabio Leonardi",reminder:"Prenotazione in attesa di conferma da parte del ristorante."},
     todo:[],
     notes:["L'aeroporto è molto vicino al centro, circa 800 m.","In base all'orario di arrivo si può aggiungere un'attività extra."],
     contacts:[]
@@ -1253,8 +1255,8 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
           <div style="font-size:20px; font-weight:800; margin-top:6px;">${d.tourBooked.price}</div>
         </div>` : ``}
         ${d.reservation ? `
-        <div class="note-box" style="margin:18px 0; padding:18px; border:1px solid ${d.reservation.code==='3262990'?'rgba(245,145,45,.65)':'rgba(47,143,107,.35)'}; background:${d.reservation.code==='3262990'?'rgba(245,145,45,.13)':'rgba(47,143,107,.08)'}; border-radius:14px;">
-          <strong style="font-size:16px; color:${d.reservation.code==='3262990'?'#c66a0a':'inherit'};">${d.reservation.title}</strong>
+        <div class="note-box" style="margin:18px 0; padding:18px; border:1px solid ${d.reservation.status==='pending'||d.reservation.code==='3262990'?'rgba(245,145,45,.65)':'rgba(47,143,107,.35)'}; background:${d.reservation.status==='pending'||d.reservation.code==='3262990'?'rgba(245,145,45,.13)':'rgba(47,143,107,.08)'}; border-radius:14px;">
+          <strong style="font-size:16px; color:${d.reservation.status==='pending'||d.reservation.code==='3262990'?'#c66a0a':'inherit'};">${d.reservation.title}</strong>
           <div style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 16px; margin-top:12px;">
             <div><small>REFERENCIA</small><br><b>${d.reservation.code}</b></div>
             <div><small>FECHA</small><br><b>${d.reservation.date}</b></div>
