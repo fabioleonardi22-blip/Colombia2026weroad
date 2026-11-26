@@ -1200,7 +1200,7 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
         <ul class="timeline">
           ${renderScheduleWithRoutes(d)}
         </ul>
-        ${d.afterDinnerNote ? `<div class="after-dinner-box"><strong>🌙 DOPO CENA — POSSIBILI OPZIONI</strong><div>${d.afterDinnerNote}</div><ul>${d.afterDinnerOptions.map(([name,description,url])=>`<li><b>${name}</b> — ${description} <a href="${url}" target="_blank" rel="noopener">Apri Google Maps ↗</a></li>`).join("")}</ul></div>` : ""}
+
         ${d.transferFee ? `
         <div class="note-box" style="margin:10px 0; padding:10px 14px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.07); border-radius:12px;">
           <strong style="font-size:12px;">${d.transferFee.title}</strong>
@@ -1237,6 +1237,7 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
           </div>
           <p style="margin:12px 0 0;"><b>${d.reservation.reminder}</b></p>
         </div>` : ``}
+        ${d.afterDinnerNote ? `<div class="after-dinner-box"><strong>🌙 DOPO CENA — POSSIBILI OPZIONI</strong><div>${d.afterDinnerNote}</div><ul>${d.afterDinnerOptions.map(([name,description,url])=>`<li><b>${name}</b> — ${description} <a href="${url}" target="_blank" rel="noopener">Apri Google Maps ↗</a></li>`).join("")}</ul></div>` : ""}
       </div>
       <div>
         <div class="side-card">
