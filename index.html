@@ -1106,31 +1106,42 @@ const uniqueStops = [];
 DAYS.forEach(d=>{ if(uniqueStops[uniqueStops.length-1] !== d.dest) uniqueStops.push(d.dest); });
 routeStrip.innerHTML = uniqueStops.map(s=>`<div class="stop"><b>${s}</b><span>tappa</span></div>`).join('');
 
-// Overview map (Leaflet + OpenStreetMap — no API key required, no iframe loading issues)
-const ROUTE_STOPS = [
-  {name:"Bogotá", lat:4.7110, lng:-74.0721},
-  {name:"Leticia", lat:-4.2153, lng:-69.9406},
-  {name:"Pereira", lat:4.8087, lng:-75.6906},
-  {name:"Salento", lat:4.6438, lng:-75.5700},
-  {name:"Medellín", lat:6.2442, lng:-75.5812},
-  {name:"Guatapé", lat:6.2325, lng:-75.1590},
-  {name:"Cartagena", lat:10.3910, lng:-75.4794},
-  {name:"San Andrés", lat:12.5847, lng:-81.7006}
-];
-const overviewMap = L.map('overviewMap', {scrollWheelZoom:false});
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 18,
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(overviewMap);
-const routeLatLngs = ROUTE_STOPS.map(s=>[s.lat, s.lng]);
-L.polyline(routeLatLngs, {color:'#FF5A36', weight:3, dashArray:'6,8'}).addTo(overviewMap);
-ROUTE_STOPS.forEach((s,i)=>{
-  L.marker([s.lat, s.lng]).addTo(overviewMap).bindPopup(`<b>${i+1}. ${s.name}</b>`);
-});
-overviewMap.fitBounds(routeLatLngs, {padding:[28,28]});
-function refreshOverviewMap(){setTimeout(function(){overviewMap.invalidateSize();overviewMap.fitBounds(routeLatLngs,{padding:[36,36],maxZoom:6});},100);}
-window.addEventListener('load',refreshOverviewMap);
-window.addEventListener('resize',refreshOverviewMap);
+// Overview map (Leaflet + OpenStreetMap)
+// La mappa è un componente opzionale: un errore del CDN o di Leaflet
+// non deve interrompere il rendering di programma, checklist e schede giorno.
+try {
+  const mapElement = document.getElementById('overviewMap');
+  if (mapElement && typeof L !== 'undefined' && L.map) {
+    const ROUTE_STOPS = [
+      {name:"Bogotá", lat:4.7110, lng:-74.0721},
+      {name:"Leticia", lat:-4.2153, lng:-69.9406},
+      {name:"Pereira", lat:4.8087, lng:-75.6906},
+      {name:"Salento", lat:4.6438, lng:-75.5700},
+      {name:"Medellín", lat:6.2442, lng:-75.5812},
+      {name:"Guatapé", lat:6.2325, lng:-75.1590},
+      {name:"Cartagena", lat:10.3910, lng:-75.4794},
+      {name:"San Andrés", lat:12.5847, lng:-81.7006}
+    ];
+    const overviewMap = L.map('overviewMap', {scrollWheelZoom:false});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(overviewMap);
+    const routeLatLngs = ROUTE_STOPS.map(s=>[s.lat, s.lng]);
+    L.polyline(routeLatLngs, {color:'#FF5A36', weight:3, dashArray:'6,8'}).addTo(overviewMap);
+    ROUTE_STOPS.forEach((s,i)=>{
+      L.marker([s.lat, s.lng]).addTo(overviewMap).bindPopup(`<b>${i+1}. ${s.name}</b>`);
+    });
+    overviewMap.fitBounds(routeLatLngs, {padding:[28,28]});
+    function refreshOverviewMap(){setTimeout(function(){overviewMap.invalidateSize();overviewMap.fitBounds(routeLatLngs,{padding:[36,36],maxZoom:6});},100);}
+    window.addEventListener('load',refreshOverviewMap);
+    window.addEventListener('resize',refreshOverviewMap);
+  } else {
+    console.warn('Leaflet non disponibile: mappa panoramica disattivata; il resto del diario continua.');
+  }
+} catch (mapError) {
+  console.warn('Errore nella mappa panoramica; il resto del diario continua.', mapError);
+}
 
 
 // Quickview table
