@@ -1268,10 +1268,6 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
             <div style="font-size:11px; color:#888;">Presenta este código al llegar al restaurante.</div>
           </div>` : ""}
           <p style="margin:12px 0 0;"><b>${d.reservation.reminder}</b></p>
-          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;">
-            <a class="map-btn primary" href="https://www.andrescarnederes.com/wp-content/uploads/2026/10/menudc_compressed.pdf" target="_blank" rel="noopener">🍽️ Consulta il menù di Andrés D.C. (PDF)</a>
-            <a class="map-btn" href="https://www.google.com/maps/place/Andr%C3%A9s+D.C.+Bogot%C3%A1/@4.6663315,-74.0546011,21z/data=!4m10!1m2!2m1!1sandres+dc!3m6!1s0x8e3f9b3cfd2470b1:0xc2539da6c96e7110!8m2!3d4.6664071!4d-74.0544076!15sCglhbmRyZXMgZGMiA4gBAVoLIglhbmRyZXMgZGOSAQpyZXN0YXVyYW504AEA!16s%2Fg%2F11gyyzwf7z?entry=ttu" target="_blank" rel="noopener">📍 Posizione del ristorante</a>
-          </div>
         </div>` : ``}
         ${d.afterDinnerNote ? `<div class="after-dinner-box"><strong>🌙 DOPO CENA — POSSIBILI OPZIONI</strong><div>${d.afterDinnerNote}</div><ul>${d.afterDinnerOptions.map(([name,description,url])=>`<li><b>${name}</b> — ${description} <a href="${url}" target="_blank" rel="noopener">Apri Google Maps ↗</a></li>`).join("")}</ul></div>` : ""}
       </div>
@@ -1302,7 +1298,7 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
         ${d.contacts && d.contacts.length ? `
         <div class="side-card">
           <h4>Contatti</h4>
-          ${d.contacts.map(c=>`<div class="contact-row"><span>${c[0]}</span><a href="#">${c[1]}</a></div>`).join('')}
+          ${d.contacts.map(c=>`<div class="contact-row"><span>${c[0]}</span>${/^https?:\\/\\//.test(c[1]) ? `<a href="${c[1]}" target="_blank" rel="noopener">Apri link ↗</a>` : `<a href="#">${c[1]}</a>`}</div>`).join('')}
         </div>` : ``}
       </div>
     </div>
