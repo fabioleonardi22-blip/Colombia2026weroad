@@ -924,9 +924,10 @@ const DAYS = [
       ["13:30–15:00","Tempo libero per souvenir e centro."],
       ["15:00–17:00","⛵ Giro in barca sulla diga."],
       ["19:00","Rientro a Medellín."],
-      ["20:30","🍽️ Cena."],
+      ["20:30","🍽️ Cena da Bastardo Provenza — Provenza bastarda."],
       ["22:30","Serata libera."]
     ],
+    restaurantCard:{title:"Provenza bastarda",subtitle:"Sede · Provenza, El Poblado",menuUrl:"https://grupobastardo.co/carta",mapsUrl:"https://www.google.com/maps/search/?api=1&query=Bastardo%20Provenza%2C%20Cra.%2035%20%238A-11%2C%20El%20Poblado%2C%20Medell%C3%ADn"},
     todo:[],
     notes:["Rientrare in città non oltre le 19:00.","Organizzare bevande/musica sulla barca con la guida."],
     contacts:[]
@@ -1272,6 +1273,7 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
           <p style="margin:12px 0 0;"><b>${d.reservation.reminder}</b></p>
           ${d.restaurantMenuUrl || d.restaurantMapsUrl ? `<div class="map-actions" style="margin-top:14px;">${d.restaurantMenuUrl ? `<a class="map-btn primary" href="${d.restaurantMenuUrl}" target="_blank" rel="noopener">🍽️ Apri il menù</a>` : ""}${d.restaurantMapsUrl ? `<a class="map-btn" href="${d.restaurantMapsUrl}" target="_blank" rel="noopener">📍 Posizione del ristorante</a>` : ""}</div>` : d.reservation.title.includes("VENITE A TROVARCI") ? `<div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;"><a class="map-btn primary" href="https://www.sanvalentincocinaytragos.com/es/menu" target="_blank" rel="noopener">🍽️ Consulta il menù</a><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Venite+a+visitarnos%2C+Centro%2C+via+Vicente+Garc%C3%ADa%2C+Cl.+37+%232886+6-33%2C+Cartagena%2C+Colombia" target="_blank" rel="noopener">📍 Posizione del ristorante</a></div>` : ``}
         </div>` : ``}
+        ${d.restaurantCard ? `<div class="note-box" style="margin:18px 0; padding:18px; border:1px solid rgba(190,35,45,.55); background:rgba(190,35,45,.09); border-radius:14px; line-height:1.6;"><strong style="display:block; color:#b4232f; font-size:17px;">${d.restaurantCard.title}</strong><div style="margin:4px 0 12px; color:var(--muted);">${d.restaurantCard.subtitle}</div><div class="map-actions"><a class="map-btn primary" href="${d.restaurantCard.menuUrl}" target="_blank" rel="noopener">🍽️ Apri il menù</a><a class="map-btn" href="${d.restaurantCard.mapsUrl}" target="_blank" rel="noopener">📍 Posizione del locale</a></div></div>` : ``}
         ${d.afterDinnerNote ? `<div class="after-dinner-box"><strong>🌙 DOPO CENA — POSSIBILI OPZIONI</strong><div>${d.afterDinnerNote}</div><ul>${d.afterDinnerOptions.map(([name,description,url])=>`<li><b>${name}</b> — ${description} <a href="${url}" target="_blank" rel="noopener">Apri Google Maps ↗</a></li>`).join("")}</ul></div>` : ""}
       </div>
       <div>
