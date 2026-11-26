@@ -156,6 +156,13 @@
   .day-head h2{ font-size:28px; }
   .day-head .destchip{ position:relative; top:-2px; }
   .day-sub{ color: var(--text-soft); margin-top:4px; font-size:14.5px; }
+  .pre-meeting-box{margin:12px 0 4px;padding:15px 17px;background:#FFF3E3;border:1px solid #F2B66D;border-radius:13px;color:#684016;line-height:1.6}
+  .pre-meeting-box strong{display:block;color:#B85C08;font-size:12px;letter-spacing:.04em;margin-bottom:6px}
+  .after-dinner-box{margin:18px 0 8px;padding:16px 18px;background:#FFF3E3;border:1px solid #F2B66D;border-radius:14px;color:#684016;line-height:1.6}
+  .after-dinner-box strong{display:block;color:#B85C08;margin-bottom:7px}
+  .after-dinner-box ul{margin:9px 0 0;padding-left:20px}
+  .after-dinner-box a{color:#A94F05;font-weight:700;text-decoration:underline}
+
   .birthday-box{margin:18px 0 22px;padding:18px 20px;border-radius:14px;background:linear-gradient(135deg,#b91c1c,#dc2626);color:#fff;box-shadow:0 8px 22px rgba(153,27,27,.18);display:flex;flex-direction:column;gap:4px;text-align:center}
   .birthday-box .birthday-label{font-size:11px;font-weight:800;letter-spacing:.12em;opacity:.9}
   .birthday-box strong{font-family:Georgia,serif;font-size:clamp(20px,3vw,27px);letter-spacing:.02em}
@@ -720,12 +727,16 @@ const DAYS = [
   {
     id:1, date:"27 dic", dest:"Bogotá", focus:"Arrivo + La Candelaria + cena di benvenuto", map:"Plaza Bolivar, Bogota, Colombia",
     schedule:[
-      ["13:00–15:00","🛬 Arrivo a Bogotá → transfer verso hotel → check-in."],
-      ["15:00–16:00","Sistemazione, pausa e distribuzione informazioni al gruppo."],
-      ["16:00–18:30","🚶 Passeggiata a La Candelaria: Plaza Bolívar, Chorro de Quevedo, murales e vie del centro."],
-      ["19:30","Meeting del gruppo."],
+      ["13:00–18:00","🛬 Arrivi scaglionati, transfer in hotel e check-in dalle 15:00."],
+      ["18:00–18:30","🤝 Meeting point del gruppo nella hall dell’albergo."],
       ["20:00","🍽️ Cena di benvenuto: prenotazione confermata. Presentarsi 15 minuti prima."],
-      ["22:30","🌙 Dopocena: La Candelaria per una serata easy oppure Zona T / Zona Rosa se il gruppo ha energie."]
+      ["22:30","🌙 Dopocena: valutiamo insieme se uscire, considerando che avremo a disposizione anche una seconda serata a Bogotá."]
+    ],
+    preMeetingNote:"Tenendo presente gli arrivi scaglionati, il check-in alle 15:00 e il fuso orario, i suggerimenti sono di riposarsi o fare una passeggiata in centro. Chi arriva prima può coordinarsi con gli altri per un caffè o una birra.",
+    afterDinnerNote:"Avendo due sere in città, troveremo la soluzione migliore anche considerando il fuso orario.",
+    afterDinnerOptions:[
+      ["Gaira Café Cumbia House","Bar con musica dal vivo.","https://www.google.com/maps/search/?api=1&query=Gaira+Caf%C3%A9+Cumbia+House+Bogot%C3%A1"],
+      ["THEATRON","Locale molto grande con varie piste da ballo.","https://www.google.com/maps/search/?api=1&query=THEATRON+Bogot%C3%A1"]
     ],
     todo:["Prenotare la cena di benvenuto. Origen Bistró: WA +57 310 5548665.","Alternative: Casa Matilde Cocina & Whisky (+57 321 2223272) e Gato Gris."],
     notes:["Uber è consigliato per gli spostamenti.","Macondo fornisce una SIM colombiana inclusa, da trovare direttamente in hotel."],
@@ -1058,7 +1069,7 @@ function dayRouteLegs(d){
 }
 function renderScheduleWithRoutes(d){
   const legs=dayRouteLegs(d);
-  const items=d.schedule.map(([t,desc],i)=>{const extra=d.scheduleDetails?.[t];return `<li><div class="time">${t}</div><div class="desc">${desc}</div>${extra?`<div class="note-box schedule-detail-box" style="margin:10px 0 8px; padding:14px 16px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.07); border-radius:14px; line-height:1.6; white-space:pre-line;"><strong class="schedule-detail-title">${extra.split("\n")[0]}</strong><div class="schedule-detail-body">${extra.slice(extra.indexOf("\n")+1)}</div></div>`:""}</li>`;});
+  const items=d.schedule.map(([t,desc],i)=>{const extra=d.scheduleDetails?.[t];const pre=d.id===1&&i===0?`<div class="note-box pre-meeting-box"><strong>🕒 DALLE 13:00 AL MEETING POINT</strong><div>${d.preMeetingNote}</div></div>`:"";return `<li><div class="time">${t}</div><div class="desc">${desc}</div>${pre}${extra?`<div class="note-box schedule-detail-box" style="margin:10px 0 8px; padding:14px 16px; border:1px solid rgba(47,143,107,.35); background:rgba(47,143,107,.07); border-radius:14px; line-height:1.6; white-space:pre-line;"><strong class="schedule-detail-title">${extra.split("\n")[0]}</strong><div class="schedule-detail-body">${extra.slice(extra.indexOf("\n")+1)}</div></div>`:""}</li>`;});
   if(d.cashFee || d.fincaExcursion){
     const feeIndex=d.schedule.findIndex(([t])=>t==="13:00–19:00");
     if(feeIndex>=0){
@@ -1187,6 +1198,7 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
         <ul class="timeline">
           ${renderScheduleWithRoutes(d)}
         </ul>
+        ${d.afterDinnerNote ? `<div class="after-dinner-box"><strong>🌙 DOPO CENA — POSSIBILI OPZIONI</strong><div>${d.afterDinnerNote}</div><ul>${d.afterDinnerOptions.map(([name,description,url])=>`<li><b>${name}</b> — ${description} <a href="${url}" target="_blank" rel="noopener">Apri Google Maps ↗</a></li>`).join("")}</ul></div>` : ""}
         ${d.transferFee ? `
         <div class="note-box" style="margin:10px 0; padding:10px 14px; border:1px solid rgba(226,63,31,.35); background:rgba(226,63,31,.07); border-radius:12px;">
           <strong style="font-size:12px;">${d.transferFee.title}</strong>
