@@ -727,7 +727,7 @@ body{font-size:var(--type-body)!important;line-height:1.6;font-weight:400!import
 <script>
 const DAYS = [
   {
-    id:1, date:"27 dic", dest:"Bogotá", focus:"Arrivo + La Candelaria + cena di benvenuto", map:"Plaza Bolivar, Bogota, Colombia",
+    id:1, date:"27 dic", dest:"Bogotá", focus:"Arrivo + La Candelaria + cena di benvenuto", map:"Origen Bistró, Carrera 4 #12C-94, La Candelaria, Bogotá, Colombia", restaurantName:"Origen Bistró", restaurantMenuUrl:"https://www.origenbistro.com/menu/", restaurantMapsUrl:"https://www.google.com/maps/search/?api=1&query=Origen+Bistro+Carrera+4+12C-94+La+Candelaria+Bogota+Colombia",
     schedule:[
       ["13:00–18:00","🛬 Arrivi scaglionati, transfer in hotel e check-in dalle 15:00."],
       ["18:00–18:30","🤝 Meeting point del gruppo nella hall dell’albergo."],
@@ -753,12 +753,12 @@ const DAYS = [
       phone:"+393397578967",
       code:"BEDB1AD4",
       reminder:"Recuerda llegar 15 minutos antes de la hora reservada.",
-      zone:"Zona T — Bogotá",
+      zone:"La Candelaria — Bogotá",
       celebration:"Cena di gruppo"
     }
   },
   {
-    id:2, date:"28 dic", dest:"Bogotá", focus:"Centro storico + cultura + Monserrate + Andrés D.C.", map:"Cerro de Monserrate, Bogota, Colombia",
+    id:2, date:"28 dic", dest:"Bogotá", focus:"Centro storico + cultura + Monserrate + Andrés D.C.", map:"Andrés D.C., Calle 82 #12-21, Zona T, Bogotá, Colombia", restaurantName:"Andrés D.C.", restaurantMenuUrl:"https://www.andrescarnederes.com/wp-content/uploads/2026/10/menudc_compressed.pdf", restaurantMapsUrl:"https://www.google.com/maps/search/?api=1&query=4.6664071%2C-74.0544076",
     schedule:[
       ["09:00–09:30","☕ Chorro de Quevedo: punto di partenza della passeggiata nella Candelaria."],
       ["09:30–10:15","🎨 Calle del Embudo e vicoli della Candelaria: murales, café e botteghe."],
@@ -1268,7 +1268,7 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
             <div style="font-size:11px; color:#888;">Presenta este código al llegar al restaurante.</div>
           </div>` : ""}
           <p style="margin:12px 0 0;"><b>${d.reservation.reminder}</b></p>
-          ${d.reservation.title.includes("VENITE A TROVARCI") ? `<div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;"><a class="map-btn primary" href="https://www.sanvalentincocinaytragos.com/es/menu" target="_blank" rel="noopener">🍽️ Consulta il menù</a><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Venite+a+visitarnos%2C+Centro%2C+via+Vicente+Garc%C3%ADa%2C+Cl.+37+%232886+6-33%2C+Cartagena%2C+Colombia" target="_blank" rel="noopener">📍 Posizione del ristorante</a></div>` : ``}
+          ${d.restaurantMenuUrl || d.restaurantMapsUrl ? `<div class="map-actions" style="margin-top:14px;">${d.restaurantMenuUrl ? `<a class="map-btn primary" href="${d.restaurantMenuUrl}" target="_blank" rel="noopener">🍽️ Apri il menù</a>` : ""}${d.restaurantMapsUrl ? `<a class="map-btn" href="${d.restaurantMapsUrl}" target="_blank" rel="noopener">📍 Posizione del ristorante</a>` : ""}</div>` : d.reservation.title.includes("VENITE A TROVARCI") ? `<div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;"><a class="map-btn primary" href="https://www.sanvalentincocinaytragos.com/es/menu" target="_blank" rel="noopener">🍽️ Consulta il menù</a><a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Venite+a+visitarnos%2C+Centro%2C+via+Vicente+Garc%C3%ADa%2C+Cl.+37+%232886+6-33%2C+Cartagena%2C+Colombia" target="_blank" rel="noopener">📍 Posizione del ristorante</a></div>` : ``}
         </div>` : ``}
         ${d.afterDinnerNote ? `<div class="after-dinner-box"><strong>🌙 DOPO CENA — POSSIBILI OPZIONI</strong><div>${d.afterDinnerNote}</div><ul>${d.afterDinnerOptions.map(([name,description,url])=>`<li><b>${name}</b> — ${description} <a href="${url}" target="_blank" rel="noopener">Apri Google Maps ↗</a></li>`).join("")}</ul></div>` : ""}
       </div>
