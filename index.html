@@ -793,7 +793,9 @@ const DAYS = [
       people:"17",
       note:"Sin notas adicionales",
       phone:"+57 316 5264781 / +57 317 3656026",
-      code:"No indicado",
+      code:"SV07212",
+      zone:"Zona T — Bogotá",
+      celebration:"Cena di gruppo",
       reminder:"Recuerda llegar 15 minutos antes de la hora de tu reserva."
     }
   },
@@ -1252,16 +1254,17 @@ dayPanelsEl.innerHTML = DAYS.map((d,idx)=>{
             <div><small>FECHA</small><br><b>${d.reservation.date}</b></div>
             <div><small>HORA</small><br><b>${d.reservation.time}</b></div>
             <div><small>COMENSALES</small><br><b>${d.reservation.people}</b></div>
-            <div><small>ZONA</small><br><b>${d.reservation.zone}</b></div>
-            <div><small>CELEBRACIÓN</small><br><b>${d.reservation.celebration}</b></div>
-            <div><small>TITULAR</small><br><b>${d.reservation.name}</b></div>
-            <div><small>CORREO</small><br><b>${d.reservation.email}</b></div>
+            ${d.reservation.zone ? `<div><small>ZONA</small><br><b>${d.reservation.zone}</b></div>` : ""}
+            ${d.reservation.celebration ? `<div><small>CELEBRACIÓN</small><br><b>${d.reservation.celebration}</b></div>` : ""}
+            <div><small>TITULAR</small><br><b>${d.reservation.name || "Fabio Leonardi"}</b></div>
+            ${d.reservation.email ? `<div><small>CORREO</small><br><b>${d.reservation.email}</b></div>` : ""}
           </div>
+          ${d.reservation.qrImage ? `
           <div style="margin:16px auto 0; padding:16px; max-width:320px; text-align:center; background:#fff; border:1px solid #ddd; border-radius:10px;">
             <div style="font-size:11px; letter-spacing:1.4px; font-weight:700; color:#888;">TU CÓDIGO QR DE CHECK-IN</div>
-            <img src="${d.reservation.qrImage}" alt="QR check-in reserva SV07212" style="display:block; width:100%; max-width:220px; height:auto; margin:12px auto;">
+            <img src="${d.reservation.qrImage}" alt="QR check-in de la reserva" style="display:block; width:100%; max-width:220px; height:auto; margin:12px auto;">
             <div style="font-size:11px; color:#888;">Presenta este código al llegar al restaurante.</div>
-          </div>
+          </div>` : ""}
           <p style="margin:12px 0 0;"><b>${d.reservation.reminder}</b></p>
           <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;">
             <a class="map-btn primary" href="https://www.andrescarnederes.com/wp-content/uploads/2026/10/menudc_compressed.pdf" target="_blank" rel="noopener">🍽️ Consulta il menù di Andrés D.C. (PDF)</a>
